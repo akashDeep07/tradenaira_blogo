@@ -1,0 +1,21 @@
+development: &defaults
+  adapter: mysql2
+  encoding: utf8
+  database: tradenaira_blogo
+  username: root
+  password: root
+  pool: 5
+  # reconnect: true
+  socket: '/tmp/mysql.sock'
+
+test:
+  <<: *defaults
+  database: tradenaira_blogo_test
+
+production:
+  <<: *defaults
+  database: tradenaira_blogo_production
+
+development:
+  <<: *defaults
+  database: tradenaira_blogo_development
