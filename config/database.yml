@@ -7,6 +7,7 @@ development: &defaults
   pool: 5
   # reconnect: true
   socket: '/tmp/mysql.sock'
+  host: 127.0.0.1
 
 test:
   <<: *defaults
