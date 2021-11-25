@@ -9,7 +9,7 @@ server '162.243.160.154', user: 'root', port: 22, roles: [:web, :app, :db], prim
 
 
 set :stage, 					:production
-set :branch, 					'main'
+set :branch, 					'master'
 set :rails_env,       			:production
 set :puma_env, 					:production
 
