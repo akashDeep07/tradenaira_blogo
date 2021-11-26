@@ -14,7 +14,7 @@ set :pty, 			   false
 set :use_sudo, 		   true
 set :rvm_ruby_version, '2.3.8@blogo'
 set :deploy_via,       :remote_cache
-set :deploy_to, 	   "/home/root/#{fetch(:application)}"
+set :deploy_to, 	   "/root/#{fetch(:application)}"
 # set :default_environment, 		{ 'PATH' => "/home/deploy/.rvm/bin/rvm" }
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}.sock"
 set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
