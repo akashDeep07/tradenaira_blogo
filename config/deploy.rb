@@ -4,10 +4,10 @@ lock "~> 3.16.0"
 set :application,           "tradenaira_blogo"
 
 set :repo_url, 				"git@github.com:akashDeep07/tradenaira_blogo.git"
-set :user, 					"root"
-set :puma_threads, 		 	[4, 16]
-set :puma_workers, 		 	2
-set :rvm_ruby_string, 		'ruby-2.3.8'
+set :user, 					  "root"
+set :puma_threads, 		[4, 16]
+set :puma_workers, 		2
+set :rvm_ruby_string, 'ruby-2.3.8'
 
 
 set :pty, 			   false
@@ -67,12 +67,11 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bund
 # set :ssh_options, verify_host_key: :secure
 
 ## Defaults:
-set :scm,           :git
+# set :scm,           :git
 # set :branch,        :staging
 # set :format,        :pretty
 set :log_level,     :debug
 set :keep_releases, 4
-
 
 
 namespace :puma do
@@ -83,16 +82,15 @@ namespace :puma do
       execute "mkdir #{shared_path}/tmp/pids -p"
     end
   end
-
-  before :start, :make_dirs
 end
 
+before 'deploy:starting', 'puma:make_dirs'
 
 namespace :deploy do
   desc "Make sure local git is in sync with remote."
   task :check_revision do
     on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/#{fetch(:branch)}`
+      unless `git rev-parse HEAD` == `git rev-parse origin/master`
         puts "WARNING: HEAD is not the same as origin/master"
         puts "Run `git push` to sync changes."
         exit
@@ -111,42 +109,12 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:stop'
+      invoke 'puma:restart'
     end
   end
 
   before :starting,     :check_revision
+  after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
-
-namespace :puma do
-  desc 'Create Directories for Puma Pids and Socket'
-  task :make_dirs do
-    on roles(:app) do
-      execute "mkdir #{shared_path}/tmp/sockets -p"
-      execute "mkdir #{shared_path}/tmp/pids -p"
-    end
-  end
-
-  # before :start, :make_dirs
-end
-
-# ps aux | grep puma    # Get puma pid
-# kill -s SIGUSR2 pid   # Restart puma
-# kill -s SIGTERM pid   # Stop puma
-
-# nginx configuration
-set :nginx_sites_available_path, "/etc/nginx/sites-available"
-set :nginx_sites_enabled_path, "/etc/nginx/sites-enabled"
-
-
-# Default settings
-set :foreman_use_sudo, true # Set to :rbenv for rbenv sudo, :rvm for rvmsudo or true for normal sudo
-set :foreman_roles, :all
-set :foreman_template, 'systemd'
-set :foreman_export_path, ->{ '/etc/init.d' }
-set :foreman_options, ->{ {
-  app: "/home/#{fetch(:user)}/apps/#{fetch(:application)}/current",
-  log: "/home/#{fetch(:user)}/apps/#{fetch(:application)}/shared/log"
-} }
