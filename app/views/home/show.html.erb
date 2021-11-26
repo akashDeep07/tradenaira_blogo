@@ -1,24 +1,29 @@
-<img src="<%= @post.meta_image %>">
-<span>By <%= @post.user.name %><time class="float-end"><%= I18n.localize(@post.published_at.to_date, format: :long) %></time></span>
-<h4><%= @post.title %></h4>
-<p><%= raw @post.raw_content %></p>
-     <% if Blogo.config.disqus_shortname %>
-        <section id='disqus-comments'>
-          <h1><%= t('blogo.user.comments') %></h1>
-          <div id="disqus_thread" aria-live="polite"></div>
-          <noscript><%= t('blogo.user.please_enable_javascript') %></noscript>
-        </section>
-        <script type="text/javascript">
-          var disqus_shortname  = '<%= Blogo.config.disqus_shortname %>';
-          var disqus_identifier = 'blog-post-<%= @post.id %>';
-          var disqus_url        = '<%= blogo_post_url(@post) %>';
-          var disqus_title      = '<%= @post.title %>';
-          var disqus_script     = 'embed.js';
+<div class="container-fluid pt-5 pb-5">
+    <div class="container">
+        <h1><%= @post.title %></h1>
+        <span>By <%= @post.user.name %><time class="float-end"><%= I18n.localize(@post.published_at.to_date, format: :long) %></time></span>
+        <img class="mt-5 mb-5 w-100" src="<%= @post.meta_image %>">
+        <% re = /<img("[^"]*"|'[^']*'|[^'">])*>/ %>
+        <p><%= raw @post.raw_content.gsub!(re, '').gsub('&nbsp;','') %></p>
+        <% if Blogo.config.disqus_shortname %>
+            <section id='disqus-comments'>
+                <h1><%= t('blogo.user.comments') %></h1>
+                <div id="disqus_thread" aria-live="polite"></div>
+                <noscript><%= t('blogo.user.please_enable_javascript') %></noscript>
+            </section>
+            <script type="text/javascript">
+                var disqus_shortname  = '<%= Blogo.config.disqus_shortname %>';
+                var disqus_identifier = 'blog-post-<%= @post.id %>';
+                var disqus_url        = '<%= blogo_post_url(@post) %>';
+                var disqus_title      = '<%= @post.title %>';
+                var disqus_script     = 'embed.js';
 
-          (function () {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = document.location.protocol + '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-          }());
-        </script>
-       <% end %> 
+                (function () {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = document.location.protocol + '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                }());
+            </script>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container-fluid pt-5 pb-5">
+	<div class="container all-blogs">
+		<div class="row">
+			<% @posts.each do |post| %>
+				<div class="col-3 blog-card">
+					<div class="col">
+						<div class="image">
+							<a href="/news/<%= post.permalink %>"><img src="<%= post.meta_image %>"></a>
+							<time><%= I18n.localize(post.published_at.to_date, format: :long) %></time>
+						</div>
+						<div class="content">
+							<% if post.tags.present? %>
+								<ul class="tags">
+									<% post.tags.each do |tag| %>
+										<li>
+											<a href="/tags/<%= tag.name %>">#<%= tag.name %></a>
+										</li>
+									<% end %>
+								</ul>
+							<% end %>
+							<h4><%= link_to post.title, '/news/'+post.permalink %></h4>
+							<% re = /<("[^"]*"|'[^']*'|[^'">])*>/ %>
+							<p><%= post.raw_content.gsub!(re, '').gsub('&nbsp;','')[0,60] %>...</p>
+							<span>By <%= post.user.name %></span>
+							<span class="quick-view" data-id="<%= post.id %>">Quick View <i class="fa fa-eye"></i></span>
+						</div>
+					</div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+</div>
+<div class="quick-view-popup">
+	<div class="quick-view-wrapper">
+		<i class="custom-close-btn close-quick-view"></i>
+		<div class="quick-view-content"></div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('.quick-view').on('click', function() {
+		var post_id = $(this).data('id');
+		var post_html = '';
+		$.ajax({
+			url: "/search_by_id/"+post_id,
+			type: "get",
+			success: function(resp){
+				if (resp.success) {
+					if (resp.data.content) {
+						$('.quick-view-popup').fadeIn('slow');
+						$('.quick-view-content').html(`<h4>${resp.data.title}</h4>${resp.data.content}`);
+					}
+				}
+			},
+			dataType: "json",
+			error: function(){
+			}
+		});
+	});
+	$('.close-quick-view').on('click', function() {
+		$('.quick-view-popup').fadeOut('slow');
+	})
+</script>
