@@ -47,7 +47,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 
 
 # Default value for :linked_files is []
-append :linked_files, "config/database.yml", "config/nginx.conf", "config/master.key"
+append :linked_files, "config/database.yml", "config/nginx.conf"
 # set :linked_files, fetch(:linked_files, []).push("config/database.yml", "config/puma.rb", "config/master.key")
 
 
