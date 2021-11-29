@@ -13,7 +13,7 @@
 					</div>
 					<div class="text">
 						<h1><%= latest_post.title %></h1>
-						<p><%= latest_post.raw_content.gsub!(@re, '').gsub('&nbsp;','')[0,60] %>...</p>
+						<p><%= latest_post.raw_content.gsub(@re, '').gsub('&nbsp;','')[0,60] %>...</p>
 					</div>
 					<a href="/news/<%= latest_post.permalink %>" class="more">Read more</a>
 				</div>
@@ -42,7 +42,7 @@
 								</ul>
 							<% end %>
 							<h4><%= link_to post.title, '/news/'+post.permalink %></h4>
-							<p><%= post.raw_content.gsub!(@re, '').gsub('&nbsp;','')[0,60] %>...</p>
+							<p><%= post.raw_content.gsub(@re, '').gsub('&nbsp;','')[0,60] %>...</p>
 							<span>By <%= post.user.name %></span>
 							<span class="quick-view" data-id="<%= post.id %>">Quick View <i class="fa fa-eye"></i></span>
 						</div>

@@ -1,8 +1,8 @@
 class HomeController < ApplicationController
 
 	def index
-		@posts = Blogo::Post.published.all
-		@latest_posts = Blogo::Post.published.last 3
+		@posts = Blogo::Post.published.sort.reverse
+		@latest_posts = Blogo::Post.published.sort.reverse.first(3)
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
 	end
 

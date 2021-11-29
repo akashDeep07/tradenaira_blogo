@@ -23,6 +23,76 @@ $sky-color: #0abfe8;
 ::-webkit-scrollbar-thumb {
     background-color: #9d9d9d;
 }
+footer {
+    background-color: #f7f7f7;
+    border-top: 1px solid #d1d1d1;
+    .footer-info {
+        justify-content: center;
+        text-align: center;
+        img {
+            width: 250px;
+        }
+    }
+    .social-links-row {
+        ul {
+            margin: 0;
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            li {
+                margin: 0 15px;
+                a {
+                    text-decoration: none;
+                    i {
+                        background-color: #ffffff;
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.24);
+                        transition: transform .5s ease-in-out, background-color .3s ease-in-out, color .3s ease-in-out;
+                        &.fa-twitter {
+                            color: #1da1f2;
+                            &:hover {
+                                background-color: #1da1f2;
+                            }
+                        }
+                        &.fa-instagram {
+                            color: #e91e63;
+                            &:hover {
+                                background-color: #e91e63;
+                            }
+                        }
+                        &.fa-facebook {
+                            color: #3b5998;
+                            &:hover {
+                                background-color: #3b5998;
+                            }
+                        }
+                        &.fa-linkedin {
+                            color: #0e76a8;
+                            &:hover {
+                                background-color: #0e76a8;
+                            }
+                        }
+                        &.fa-youtube-play {
+                            color: #ff0000;
+                            &:hover {
+                                background-color: #ff0000;
+                            }
+                        }
+                        &:hover {
+                            color: #ffffff;
+                            transform: scale(1.2);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 .custom-close-btn {
     position: relative;
     cursor: pointer;
