@@ -5,7 +5,8 @@ gem 'rails', '4.0.12'
 
 # Use postgresql as the database for Active Record
 # gem 'pg'
-# gem 'mysql2', '~> 0.3.21'
+gem 'mysql2', '~> 0.3.21'
+# gem 'mysql2', '~> 0.4.10'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 
@@ -44,9 +45,9 @@ group :development do
   
 end
 
-group :production do
-	gem 'mysql2', '~> 0.4.10'
-end
+# group :production do
+# 	gem 'mysql2', '~> 0.4.10'
+# end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
