@@ -5,7 +5,7 @@ gem 'rails', '4.0.12'
 
 # Use postgresql as the database for Active Record
 # gem 'pg'
-gem 'mysql2', '~> 0.3.21'
+# gem 'mysql2', '~> 0.3.21'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 
@@ -42,6 +42,10 @@ group :development do
   gem 'capistrano3-nginx'
   gem 'capistrano-rails-collection'
   
+end
+
+group :production do
+	gem 'mysql2', '~> 0.4.10'
 end
 
 # Use ActiveModel has_secure_password
