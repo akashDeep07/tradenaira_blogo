@@ -5,7 +5,7 @@
 # set :branch,    :develop
 
 
-server '162.243.160.154', user: 'root', port: 22, roles: [:web, :app, :db], primary: true
+server '143.198.111.95', user: 'root', port: 22, roles: [:web, :app, :db], primary: true
 
 
 set :stage, 					:production
