@@ -1,15 +1,50 @@
+<div class="banner">
+	<div class="photos">
+		<% @latest_posts.each_with_index do |latest_post, index| %>
+		<div class="photo" data-id="<%= index+1 %>" data-image="<%= latest_post.meta_image %>"></div>
+	<% end %>
+	</div>
+	<div class="grid">
+		<% @latest_posts.each_with_index do |latest_post, index| %>
+			<div class="col">
+				<div class="info" data-id="<%= index+1 %>">
+					<div class="loader">
+						<div class="bar"></div>
+					</div>
+					<div class="text">
+						<h1><%= latest_post.title %></h1>
+						<p><%= latest_post.raw_content.gsub(@re, '').gsub('&nbsp;','')[0,60] %>...</p>
+					</div>
+					<a href="/news/<%= latest_post.permalink %>" class="more">Read more</a>
+				</div>
+			</div>
+		<% end %>
+	</div>
+</div>
 <div class="container-fluid pt-5 pb-5">
 	<div class="container all-blogs">
 		<div class="row">
 			<% @posts.each do |post| %>
 				<div class="col-3 blog-card">
 					<div class="col">
-						<img src="<%= post.meta_image %>">
+						<div class="image">
+							<a href="/news/<%= post.permalink %>"><img src="<%= post.meta_image %>"></a>
+							<time><%= I18n.localize(post.published_at.to_date, format: :long) %></time>
+						</div>
 						<div class="content">
-							<h4><%= link_to post.title, blogo_post_path(post) %></h4>
-							<% re = /<("[^"]*"|'[^']*'|[^'">])*>/ %>
-							<p><%= post.raw_content.gsub!(re, '').gsub('&nbsp;','')[0,60] %>...</p>
-							<span>By <%= post.user.name %><time class="float-end"><%= I18n.localize(post.published_at.to_date, format: :long) %></time></span>
+							<% if post.tags.present? %>
+								<ul class="tags">
+									<% post.tags.each do |tag| %>
+										<li>
+											<a href="/tags/<%= tag.name %>">#<%= tag.name %></a>
+										</li>
+									<% end %>
+								</ul>
+							<% end %>
+							<h4><%= link_to post.title, '/news/'+post.permalink %></h4>
+							<p><%= post.raw_content.gsub(@re, '').gsub('&nbsp;','')[0,60] %>...</p>
+							<span>By <%= post.user.name %></span>
+							<span class="quick-view" data-id="<%= post.id %>">Quick View <i class="fa fa-eye"></i></span>
 						</div>
 					</div>
 				</div>
@@ -17,23 +52,96 @@
 		</div>
 	</div>
 </div>
-<style type="text/css">
-	.all-blogs .blog-card img {
-		width: 100%;
-		height: 200px;
-		object-fit: cover;
-	}
-	.all-blogs .blog-card .col {
-		margin: 0 10px;
-		overflow: hidden;
-		border-radius: 4px;
-		box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-	}
-	.all-blogs .blog-card .content {
-		padding: 10px 20px;
-	}
-	.all-blogs .blog-card .content h4 a {
-		color: #000000;
-		text-decoration: none;
-	}
-</style>
+<div class="quick-view-popup">
+	<div class="quick-view-wrapper">
+		<i class="custom-close-btn close-quick-view"></i>
+		<div class="quick-view-content"></div>
+	</div>
+</div>
+<script type="text/javascript">
+	$('.quick-view').on('click', function() {
+		var post_id = $(this).data('id');
+		var post_html = '';
+		$.ajax({
+			url: "/search_by_id/"+post_id,
+			type: "get",
+			success: function(resp){
+				if (resp.success) {
+					if (resp.data.content) {
+						$('.quick-view-popup').fadeIn('slow');
+						$('.quick-view-content').html(`<h4>${resp.data.title}</h4>${resp.data.content}`);
+					}
+				}
+			},
+			dataType: "json",
+			error: function(){
+			}
+		});
+	});
+	$('.close-quick-view').on('click', function() {
+		$('.quick-view-popup').fadeOut('slow');
+	})
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var duration = 5,
+		currentindex = Math.round(Math.random()*(3-1)+1),
+		totalitems = $('.info').length,
+		timeline = new TimelineMax(),
+		item,
+		bar;
+		function runslide() {
+			item = $('[data-id='+ currentindex +']'),
+			bar = item.find('.bar');
+			item.addClass('active');
+			timeline.play();
+			timeline
+			.to(bar, 0, {left: '-100%'})
+			.to(bar, duration, {left: '0%', ease: Linear.easeNone, delay: .75,
+				onComplete: function() {
+					item.addClass('fadeout');
+				}
+			})
+			.to(bar, duration/10, {left: '100%', ease: Power4.easeIn, delay: .25,
+				onComplete: function() {
+					if(currentindex == totalitems) {
+						currentindex = 1;
+					} else {
+						currentindex++;
+					}
+					item.removeClass('active fadeout');
+					timeline.clear();
+					runslide();
+				}
+			});
+		}
+		function clickslide(e) {
+			currentindex = e;
+			timeline.clear();
+			TweenMax.to(bar, duration/10, {left: '0%', ease: Power4.easeOut});
+			TweenMax.to(bar, duration/10, {left: '100%', ease: Power4.easeIn, delay: duration/10});
+			$('.photo, .info').removeClass('active fadeout');
+			runslide();
+		}
+		$('.banner')
+		.on('click', '.info:not(.active, .fadeout)', function() {
+			clickslide($(this).attr('data-id'));
+			timeline.pause();
+		})
+		.on('click', '.info.active:not(.fadeout)', function() {
+			// do nothing
+		})
+		.on('mouseover', '.info.active:not(.fadeout)', function() {
+			timeline.pause();
+		})
+		.on('mouseout', '.info.active:not(.fadeout)', function() {
+			timeline.play();
+		});
+		$('.photo').each(function() {
+			$(this).attr('style', `background-image: url('${$(this).data('image')}')`);
+		});
+		$(window).on('load', function() {
+			runslide();
+		});
+	});
+</script>
