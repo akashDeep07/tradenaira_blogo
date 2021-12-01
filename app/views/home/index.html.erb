@@ -83,10 +83,9 @@
 	})
 </script>
 <script type="text/javascript">
-	$(document).ready(function() {
-	});
 	$(window).on('load', function() {
-		$('.info[data-id="1"]').click();
+	});
+	$(document).ready(function() {
 		var duration = 5,
 		currentindex = Math.round(Math.random()*(3-1)+1),
 		totalitems = $('.info').length,
@@ -146,5 +145,6 @@
 		$(window).on('load', function() {
 			runslide();
 		});
+		$('.info[data-id="1"]').click();
 	});
 </script>
