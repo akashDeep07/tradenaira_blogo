@@ -15,7 +15,7 @@
 						<h1><%= latest_post.title %></h1>
 						<p><%= latest_post.raw_content.gsub(@re, '').gsub('&nbsp;','')[0,60] %>...</p>
 					</div>
-					<a href="/news/<%= latest_post.permalink %>" class="more">Read more</a>
+					<a href="/blogs/<%= latest_post.permalink %>" class="more">Read more</a>
 				</div>
 			</div>
 		<% end %>
@@ -28,7 +28,7 @@
 				<div class="col-3 blog-card">
 					<div class="col">
 						<div class="image">
-							<a href="/news/<%= post.permalink %>"><img src="<%= post.meta_image %>"></a>
+							<a href="/blogs/<%= post.permalink %>"><img src="<%= post.meta_image %>"></a>
 							<time><%= I18n.localize(post.published_at.to_date, format: :long) %></time>
 						</div>
 						<div class="content">
@@ -41,7 +41,7 @@
 									<% end %>
 								</ul>
 							<% end %>
-							<h4><%= link_to post.title, '/news/'+post.permalink %></h4>
+							<h4><%= link_to post.title, '/blogs/'+post.permalink %></h4>
 							<p><%= post.raw_content.gsub(@re, '').gsub('&nbsp;','')[0,60] %>...</p>
 							<span>By <%= post.user.name %></span>
 							<span class="quick-view" data-id="<%= post.id %>">Quick View <i class="fa fa-eye"></i></span>
