@@ -5,7 +5,7 @@ development: &defaults
   username: root
   password: root
   pool: 5
-  # reconnect: true
+  reconnect: true
   socket: '/tmp/mysql.sock'
   host: 127.0.0.1
 
