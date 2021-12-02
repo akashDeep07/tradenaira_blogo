@@ -141,8 +141,9 @@
 			$(this).attr('style', `background-image: url('${$(this).data('image')}')`);
 		});
 		$(window).on('load', function() {
-			runslide();
-			$('.info[data-id="1"]').click();
+			setTimeout(function() {
+				runslide();
+			}, 100);
 		});
 	});
 </script>

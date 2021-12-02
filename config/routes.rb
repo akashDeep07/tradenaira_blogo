@@ -2,7 +2,7 @@ TradenairaBlogo::Application.routes.draw do
   
   Blogo::Routes.mount_to(self, at: '/blog')
 
-  get '/blogs', to: 'home#index'
+  root 'home#index'
   get '/blogs/:permalink', to: 'home#show'
   get '/tags/:tag', to: 'home#search_tags'
   get '/tags', to: 'home#search_tags'
@@ -20,7 +20,6 @@ TradenairaBlogo::Application.routes.draw do
 
   # custom routes
 
-  get '/', to: 'custom_routes#root' #1
   get '/signin', to: 'custom_routes#signin' #2
   get '/signup', to: 'custom_routes#signup' #3
   get '/markets/usdngn', to: 'custom_routes#markets_usdngn' #4
