@@ -2,6 +2,21 @@ TradenairaBlogo::Application.routes.draw do
   
   Blogo::Routes.mount_to(self, at: '/blog')
 
+  scope(path: "blog", module: 'blogo', as: 'blogo') do
+    namespace :admin do
+      resources :banners, except: %w(show) do
+        collection do
+          get 'list/:category', to: "banners#index", as: 'list'
+        end
+      end
+      resources :user, only: [:edit,:update] do
+      end
+    end
+    resources :user, only: [:show] do
+
+    end
+  end
+
   root 'home#index'
   get '/blogs/:permalink', to: 'home#show'
   get '/tags/:tag', to: 'home#search_tags'
