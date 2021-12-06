@@ -16,3 +16,15 @@
     <% end %>
   </tbody>
 </table>
+<h3>Show Sidebar?</h3>
+<input type="checkbox" name="show_sidebar" id="update_sidebar" />
+
+<script type="text/javascript">
+  $('#update_sidebar').on('change', function() {
+    if($(this).is(":checked")) {
+      console.log('checked');
+    } else {
+      console.log('not checked');
+    }
+  })
+</script>
