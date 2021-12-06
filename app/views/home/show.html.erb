@@ -1,10 +1,14 @@
-<div class="container-fluid pt-5 pb-5">
-    <div class="container">
+<div class="container-fluid pt-5 pb-5 blogo-show">
+    <div class="container overflow-auto">
         <h1><%= @post.title %></h1>
-        <span>By <%= @post.user.name %><time class="float-end"><%= I18n.localize(@post.published_at.to_date, format: :long) %></time></span>
-        <img class="mt-5 mb-5 w-100" src="<%= @post.meta_image %>">
+        <time class="d-block text-end mb-3"><%= I18n.localize(@post.published_at.to_date, format: :long) %></time>
+        <img class="meta-image" src="<%= @post.meta_image %>">
         <% re = /<img("[^"]*"|'[^']*'|[^'">])*>/ %>
-        <p><%= raw @post.raw_content.gsub!(re, '').gsub('&nbsp;','') %></p>
+        <div id="raw_content">
+            <%= raw @post.raw_content.gsub!(re, '').gsub('&nbsp;','') %>
+        </div>
+    </div>
+    <div class="container">
         <% if Blogo.config.disqus_shortname %>
             <section id='disqus-comments'>
                 <h1><%= t('blogo.user.comments') %></h1>
@@ -27,3 +31,8 @@
         <% end %>
     </div>
 </div>
+<script type="text/javascript">
+    $.each($('#raw_content').find('a'), function() {
+        $(this).attr('target', '_blank');
+    });
+</script>

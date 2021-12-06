@@ -567,3 +567,19 @@ footer {
 span.marker {
     background-color: #ffff00;
 }
+.blogo-show {
+    text-align: justify;
+    .meta-image {
+        width: 500px;
+        max-width: 100%;
+        float: left;
+        margin: 0 10px 10px 0;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .blogo-show {
+        .meta-image {
+            width: 100%;
+        }
+    }
+}
