@@ -4,7 +4,8 @@ module Blogo::Admin
     # GET /admin/posts
     #
     def index
-      @posts = Blogo::Post.all
+      @posts = Blogo::Post.all.where(:is_custom => false)
+      @custom_posts = Blogo::Post.all.where(:is_custom => true)
     end
 
     # GET /admin/posts/new

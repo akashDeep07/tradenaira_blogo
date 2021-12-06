@@ -16,6 +16,24 @@
     <% end %>
   </tbody>
 </table>
+<h1 class="admin-header">Custom Posts</h1>
+
+<table class="pure-table pure-table-striped">
+  <thead>
+    <tr>
+      <th><%= t('blogo.admin.title') %></th>
+      <th><%= t('blogo.admin.status') %></th>
+      <th><%= t('blogo.admin.author') %></th>
+      <th><%= t('blogo.admin.published_on') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @custom_posts.each do |post|%>
+      <%= render partial: 'post_li', locals: {post: post} %>
+    <% end %>
+  </tbody>
+</table>
 <h3>Show Sidebar?</h3>
 <input type="checkbox" name="show_sidebar" id="update_sidebar" />
 
