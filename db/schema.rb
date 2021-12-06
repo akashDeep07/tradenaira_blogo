@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211202125629) do
+ActiveRecord::Schema.define(version: 20211203120510) do
 
   create_table "blogo_posts", force: true do |t|
     t.integer  "user_id",                          null: false
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20211202125629) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_custom",        default: false
+    t.text     "meta_title"
   end
 
   add_index "blogo_posts", ["permalink"], name: "index_blogo_posts_on_permalink", unique: true, using: :btree

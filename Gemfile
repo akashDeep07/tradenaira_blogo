@@ -34,6 +34,7 @@ group :doc do
 end
 
 group :development do 
+  gem 'pry-rails', '~> 0.3.9'
 
   gem 'capistrano',         require: false
   gem 'capistrano-rvm',     require: false
