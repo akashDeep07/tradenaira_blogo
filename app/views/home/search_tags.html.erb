@@ -21,7 +21,6 @@
 							<h4><%= link_to post.title, '/news/'+post.permalink %></h4>
 							<% re = /<("[^"]*"|'[^']*'|[^'">])*>/ %>
 							<p><%= post.raw_content.gsub!(re, '').gsub('&nbsp;','')[0,60] %>...</p>
-							<span>By <%= post.user.name %></span>
 							<span class="quick-view" data-id="<%= post.id %>">Quick View <i class="fa fa-eye"></i></span>
 						</div>
 					</div>

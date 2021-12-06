@@ -1,8 +1,8 @@
 <div class="banner">
 	<div class="photos">
 		<% @latest_posts.each_with_index do |latest_post, index| %>
-		<div class="photo" data-id="<%= index+1 %>" data-image="<%= latest_post.meta_image %>"></div>
-	<% end %>
+			<div class="photo" data-id="<%= index+1 %>" data-image="<%= latest_post.meta_image %>"></div>
+		<% end %>
 	</div>
 	<div class="grid">
 		<% @latest_posts.each_with_index do |latest_post, index| %>
@@ -43,7 +43,6 @@
 							<% end %>
 							<h4><%= link_to post.title, '/blogs/'+post.permalink %></h4>
 							<p><%= post.raw_content.gsub(@re, '').gsub('&nbsp;','')[0,60] %>...</p>
-							<span>By <%= post.user.name %></span>
 							<span class="quick-view" data-id="<%= post.id %>">Quick View <i class="fa fa-eye"></i></span>
 						</div>
 					</div>
@@ -83,7 +82,7 @@
 	})
 </script>
 <script type="text/javascript">
-	$(window).on('load', function() {
+	$(document).ready(function() {
 		var duration = 5,
 		currentindex = Math.round(Math.random()*(3-1)+1),
 		totalitems = $('.info').length,
@@ -140,10 +139,11 @@
 		$('.photo').each(function() {
 			$(this).attr('style', `background-image: url('${$(this).data('image')}')`);
 		});
-		// $(window).on('load', function() {
-		// 	setTimeout(function() {
+		$(window).on('load', function() {
+			setTimeout(function() {
 				runslide();
-			// }, 1000);
-		// });
+			}, 1000);
+			$('.info[data-id="1"]').click();
+		});
 	});
 </script>
