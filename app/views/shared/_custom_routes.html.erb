@@ -32,7 +32,9 @@
     </div>
 </div>
 <script type="text/javascript">
-    $.each($('#raw_content a'), function() {
-        $(this).attr('target', '_blank');
+    $(document).ready(function() {
+        $.each($('#raw_content a'), function() {
+            $(this).attr('target', '_blank');
+        });
     });
 </script>
