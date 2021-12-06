@@ -32,9 +32,12 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $.each($('#raw_content a'), function() {
-            $(this).attr('target', '_blank');
-        });
+    $(window).load(function() {
+        function change_links(){
+            $.each($('#raw_content a'), function() {
+                $(this).attr('target', '_blank');
+            });
+        };
+        window.setTimeout( change_links, 1000 ); // 5 seconds
     });
 </script>
