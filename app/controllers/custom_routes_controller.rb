@@ -1,17 +1,11 @@
 class CustomRoutesController < ApplicationController
 
-	# 1
-	# //tradenaira.com/
-	# def root
-	# 	@post = Blogo::Post.published.find_by_id 5
-	# 	@re = /<("[^"]*"|'[^']*'|[^'">])*>/
-	# end
-
 	# 2
 	# //tradenaira.com/signin
 	def signin
 		@post = Blogo::Post.published.find_by_id 2
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 3
@@ -19,6 +13,7 @@ class CustomRoutesController < ApplicationController
 	def signup
 		@post = Blogo::Post.published.find_by_id 3
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 4
@@ -26,6 +21,7 @@ class CustomRoutesController < ApplicationController
 	def markets_usdngn
 		@post = Blogo::Post.published.find_by_id 4
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 5
@@ -33,6 +29,7 @@ class CustomRoutesController < ApplicationController
 	def money_quick_exchange
 		@post = Blogo::Post.published.find_by_id 5
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 6
@@ -40,6 +37,7 @@ class CustomRoutesController < ApplicationController
 	def pages_faq
 		@post = Blogo::Post.published.find_by_id 6
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 7
@@ -47,6 +45,7 @@ class CustomRoutesController < ApplicationController
 	def money_escrow
 		@post = Blogo::Post.published.find_by_id 7
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 8
@@ -54,6 +53,7 @@ class CustomRoutesController < ApplicationController
 	def professional_services
 		@post = Blogo::Post.published.find_by_id 8
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 9
@@ -61,6 +61,7 @@ class CustomRoutesController < ApplicationController
 	def pages_about
 		@post = Blogo::Post.published.find_by_id 9
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 10
@@ -68,6 +69,7 @@ class CustomRoutesController < ApplicationController
 	def news
 		@post = Blogo::Post.published.find_by_id 10
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 11
@@ -75,6 +77,7 @@ class CustomRoutesController < ApplicationController
 	def pages_send_money_to_nigeria
 		@post = Blogo::Post.published.find_by_id 11
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 12
@@ -82,6 +85,7 @@ class CustomRoutesController < ApplicationController
 	def markets_eurngn
 		@post = Blogo::Post.published.find_by_id 12
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 13
@@ -89,6 +93,7 @@ class CustomRoutesController < ApplicationController
 	def pages_fee
 		@post = Blogo::Post.published.find_by_id 13
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 14
@@ -96,6 +101,7 @@ class CustomRoutesController < ApplicationController
 	def professional_services_provide_iso_certification_consultancy
 		@post = Blogo::Post.published.find_by_id 14
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 15
@@ -103,6 +109,7 @@ class CustomRoutesController < ApplicationController
 	def markets_gbpngn
 		@post = Blogo::Post.published.find_by_id 15
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 16
@@ -110,6 +117,7 @@ class CustomRoutesController < ApplicationController
 	def professional_categories_legal_administrative_services
 		@post = Blogo::Post.published.find_by_id 16
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 17
@@ -117,6 +125,7 @@ class CustomRoutesController < ApplicationController
 	def lists_top_10_richest_people_in_ghana_2019
 		@post = Blogo::Post.published.find_by_id 17
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 18
@@ -124,6 +133,7 @@ class CustomRoutesController < ApplicationController
 	def professional_categories_20
 		@post = Blogo::Post.published.find_by_id 19
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 19
@@ -131,6 +141,7 @@ class CustomRoutesController < ApplicationController
 	def lists_top_10_most_influential_people_in_nigeria_2019
 		@post = Blogo::Post.published.find_by_id 20
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 20
@@ -138,13 +149,7 @@ class CustomRoutesController < ApplicationController
 	def professional_categories_licenses_permits
 		@post = Blogo::Post.published.find_by_id 21
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
-	end
-
-	# 21
-	# //tradenaira.com/professional/categories/freight-forwarding
-	def professional_categories_freight_forwarding
-		@post = Blogo::Post.published.find_by_id 1
-		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 22
@@ -152,6 +157,7 @@ class CustomRoutesController < ApplicationController
 	def markets_ghsngn
 		@post = Blogo::Post.published.find_by_id 24
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 23
@@ -159,6 +165,7 @@ class CustomRoutesController < ApplicationController
 	def professional_services_write_a_book_that_sells_and_also_amplifies_your_personal_and_corporate_brand
 		@post = Blogo::Post.published.find_by_id 25
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 24
@@ -166,6 +173,7 @@ class CustomRoutesController < ApplicationController
 	def markets_btcngn
 		@post = Blogo::Post.published.find_by_id 26
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 25
@@ -173,6 +181,7 @@ class CustomRoutesController < ApplicationController
 	def professional_services_manage_your_project
 		@post = Blogo::Post.published.find_by_id 28
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 26
@@ -180,6 +189,7 @@ class CustomRoutesController < ApplicationController
 	def professional_services_post_your_business_on_the_top_nigerian_business_directory
 		@post = Blogo::Post.published.find_by_id 29
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 27
@@ -187,6 +197,7 @@ class CustomRoutesController < ApplicationController
 	def pages_request_money
 		@post = Blogo::Post.published.find_by_id 30
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 28
@@ -194,6 +205,7 @@ class CustomRoutesController < ApplicationController
 	def lists_top_10_richest_men_in_nigeria_2019
 		@post = Blogo::Post.published.find_by_id 31
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 29
@@ -201,6 +213,7 @@ class CustomRoutesController < ApplicationController
 	def markets_gbpzar
 		@post = Blogo::Post.published.find_by_id 32
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 30
@@ -208,6 +221,7 @@ class CustomRoutesController < ApplicationController
 	def lists_large_american_companies_that_use_prison_labour
 		@post = Blogo::Post.published.find_by_id 33
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 31
@@ -215,6 +229,7 @@ class CustomRoutesController < ApplicationController
 	def markets_zarghs
 		@post = Blogo::Post.published.find_by_id 34
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 32
@@ -222,6 +237,7 @@ class CustomRoutesController < ApplicationController
 	def markets_usdzar
 		@post = Blogo::Post.published.find_by_id 35
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 33
@@ -229,6 +245,7 @@ class CustomRoutesController < ApplicationController
 	def professional_categories_clearing_agents
 		@post = Blogo::Post.published.find_by_id 36
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 34
@@ -236,6 +253,7 @@ class CustomRoutesController < ApplicationController
 	def markets_btczar
 		@post = Blogo::Post.published.find_by_id 37
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 35
@@ -243,6 +261,7 @@ class CustomRoutesController < ApplicationController
 	def markets_usdkes
 		@post = Blogo::Post.published.find_by_id 38
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 36
@@ -250,6 +269,7 @@ class CustomRoutesController < ApplicationController
 	def markets_btcghs
 		@post = Blogo::Post.published.find_by_id 40
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 37
@@ -257,6 +277,7 @@ class CustomRoutesController < ApplicationController
 	def markets_zarngn
 		@post = Blogo::Post.published.find_by_id 42
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 38
@@ -264,6 +285,7 @@ class CustomRoutesController < ApplicationController
 	def markets_usdghs
 		@post = Blogo::Post.published.find_by_id 43
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 39
@@ -271,6 +293,7 @@ class CustomRoutesController < ApplicationController
 	def markets_gbpghs
 		@post = Blogo::Post.published.find_by_id 45
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 40
@@ -278,6 +301,7 @@ class CustomRoutesController < ApplicationController
 	def markets_gbpkes
 		@post = Blogo::Post.published.find_by_id 46
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 41
@@ -285,6 +309,7 @@ class CustomRoutesController < ApplicationController
 	def markets_zarkes
 		@post = Blogo::Post.published.find_by_id 47
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
 	# 42
@@ -292,27 +317,14 @@ class CustomRoutesController < ApplicationController
 	def markets_eurkes
 		@post = Blogo::Post.published.find_by_id 48
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+		set_meta
 	end
 
-	# 43
-	# //tradenaira.com/news/bank-atm-rates
-	def news_bank_atm_rates
-		@post = Blogo::Post.published.find_by_id 1
-		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
-	end
+	private
 
-	# 44
-	# //tradenaira.com/money/commission
-	def money_commission
-		@post = Blogo::Post.published.find_by_id 1
-		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
-	end
-
-	# 45
-	# //tradenaira.com/advertise
-	def advertise
-		@post = Blogo::Post.published.find_by_id 1
-		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
+	def set_meta
+		@meta_description = @post.meta_description if @post.meta_description.present?
+		@meta_title = @post.meta_title.present? ? @post.meta_title : @post.title
 	end
 
 end

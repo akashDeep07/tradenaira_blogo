@@ -54,7 +54,6 @@ TradenairaBlogo::Application.routes.draw do
   get '/professional/categories/20', to: 'custom_routes#professional_categories_20' #18
   get '/lists/top-10-most-influential-people-in-nigeria-2019', to: 'custom_routes#lists_top_10_most_influential_people_in_nigeria_2019' #19
   get '/professional/categories/licenses-permits', to: 'custom_routes#professional_categories_licenses_permits' #20
-  get '/professional/categories/freight-forwarding', to: 'custom_routes#professional_categories_freight_forwarding' #21
   get '/markets/ghsngn', to: 'custom_routes#markets_ghsngn' #22
   get '/professional/services/write-a-book-that-sells-and-also-amplifies-your-personal-and-corporate-brand', to: 'custom_routes#professional_services_write_a_book_that_sells_and_also_amplifies_your_personal_and_corporate_brand' #23
   get '/markets/btcngn', to: 'custom_routes#markets_btcngn' #24
@@ -76,9 +75,6 @@ TradenairaBlogo::Application.routes.draw do
   get '/markets/gbpkes', to: 'custom_routes#markets_gbpkes' #40
   get '/markets/zarkes', to: 'custom_routes#markets_zarkes' #41
   get '/markets/eurkes', to: 'custom_routes#markets_eurkes' #42
-  get '/news/bank-atm-rates', to: 'custom_routes#news_bank_atm_rates' #43
-  get '/money/commission', to: 'custom_routes#money_commission' #44
-  get '/advertise', to: 'custom_routes#advertise' #45
 
 
 end
