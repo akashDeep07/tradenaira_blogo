@@ -45,4 +45,24 @@ class HomeController < ApplicationController
 			render json: { success: false }
 		end
 	end
+
+	def update_sidebar
+		user = Blogo::User.first
+		if params[:sidebar].present? && params[:sidebar] == "true"
+			user.sidebar_enable = true
+			if user.save
+				render json: { success: true }, status: 200
+			else
+				render json: { success: false }, status: 200
+			end
+		else
+			user.sidebar_enable = false
+			if user.save
+				render json: { success: true }, status: 200
+			else
+				render json: { success: false }, status: 200
+			end
+		end
+	end
+
 end

@@ -5,82 +5,83 @@
 		<i class="search-btn fa fa-search"></i>
 	</div>
 </header>
-<nav class="sidebar-nav">
-	<div class="nav-head">
-		<i class="search-btn fa fa-search"></i>
-		<span class="close-nav custom-close-btn"></span>
-	</div>
-	<ul>
-		<li><a target="_blank" href="//wigmorewholesale.com">Buy or Sell Wholesale products in Nigeria</a></li>
-		<li><a target="_blank" href="//jump.africa">List your Service Business on Nigeria's Largest Service Marketplace</a></li>
-		<li><a target="_blank" href="//jump.africa/professional/services">Find a Freelancer in Nigeria</a></li>
-		<li><a target="_blank" href="//apartments.com/gh">Find an Apartment to rent in Ghana</a></li>
-	</ul>
-</nav>
-<div class="search-posts">
-	<div class="search-box">
-		<div class="search-area">
-			<span class="close-search custom-close-btn"></span>
-			<input type="text" id="postSearch" placeholder="Search Posts" autocomplete="off" />
+<% if Blogo::User.first.sidebar_enable? %>
+	<nav class="sidebar-nav">
+		<div class="nav-head">
+			<i class="search-btn fa fa-search"></i>
+			<span class="close-nav custom-close-btn"></span>
 		</div>
-		<div class="search-results"></div>
+		<ul>
+			<% SidebarLink.all.where(:is_active => true).each do |link| %>
+				<li><a target="_blank" href="<%= link.url %>"><%= link.title %></a></li>
+			<% end %>
+		</ul>
+	</nav>
+	<div class="search-posts">
+		<div class="search-box">
+			<div class="search-area">
+				<span class="close-search custom-close-btn"></span>
+				<input type="text" id="postSearch" placeholder="Search Posts" autocomplete="off" />
+			</div>
+			<div class="search-results"></div>
+		</div>
 	</div>
-</div>
-<script type="text/javascript">
-	$('.sidebar-bars').on('click', function() {
-		$('.sidebar-nav').addClass('active');
-	});
-	$('.search-btn').on('click', function() {
-		$('.search-posts').addClass('active');
-	});
-	$('.close-search').on('click', function() {
-		$('.search-posts').removeClass('active');
-	});
-	$('.close-nav').on('click', function() {
-		$('.sidebar-nav').removeClass('active');
-	});
-	$('#postSearch').on('keyup', function() {
-		var search_query = $(this).val();
-		var search_html = '';
-		if (search_query != '') {
-			$.ajax({
-				url: "/search_posts/"+search_query,
-				type: "get",
-				success: function(resp){
-					if (resp.success) {
-						if (resp.data.length) {
-							search_html = '<ul>';
-							$.each(resp.data, function(index, value) {
-								search_html += `
-									<a href="/news/${value.permalink}">
-										<li>
-											<div class="image">
-												<img src="${value.meta_image}" />
-											</div>
-											<div class="content">
-												<h5>${value.title}</h5>
-												<p>${value.raw_content.replace( /(<([^>]+)>)/ig, '').substring(0, 250)}...</p>
-											</div>
-										</li>
-									</a>
-								`;
-							});
-							search_html += '</ul>';
-							$('.search-results').html(search_html);
+	<script type="text/javascript">
+		$('.sidebar-bars').on('click', function() {
+			$('.sidebar-nav').addClass('active');
+		});
+		$('.search-btn').on('click', function() {
+			$('.search-posts').addClass('active');
+		});
+		$('.close-search').on('click', function() {
+			$('.search-posts').removeClass('active');
+		});
+		$('.close-nav').on('click', function() {
+			$('.sidebar-nav').removeClass('active');
+		});
+		$('#postSearch').on('keyup', function() {
+			var search_query = $(this).val();
+			var search_html = '';
+			if (search_query != '') {
+				$.ajax({
+					url: "/search_posts/"+search_query,
+					type: "get",
+					success: function(resp){
+						if (resp.success) {
+							if (resp.data.length) {
+								search_html = '<ul>';
+								$.each(resp.data, function(index, value) {
+									search_html += `
+										<a href="/news/${value.permalink}">
+											<li>
+												<div class="image">
+													<img src="${value.meta_image}" />
+												</div>
+												<div class="content">
+													<h5>${value.title}</h5>
+													<p>${value.raw_content.replace( /(<([^>]+)>)/ig, '').substring(0, 250)}...</p>
+												</div>
+											</li>
+										</a>
+									`;
+								});
+								search_html += '</ul>';
+								$('.search-results').html(search_html);
+							} else {
+								var search_html = '<span class="d-block p-2 text-center">No Posts Available!</span>';
+								$('.search-results').html(search_html);
+							}
 						} else {
-							var search_html = '<span class="d-block p-2 text-center">No Posts Available!</span>';
-							$('.search-results').html(search_html);
+							$('.search-results').html('');
 						}
-					} else {
-						$('.search-results').html('');
+					},
+					dataType: "json",
+					error: function(){
 					}
-				},
-				dataType: "json",
-				error: function(){
-				}
-			});
-		} else {
-			$('.search-results').html('');
-		}
-	});
-</script>
+				});
+			} else {
+				$('.search-results').html('');
+			}
+		});
+	</script>
+<% end %>

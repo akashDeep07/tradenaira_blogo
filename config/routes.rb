@@ -23,6 +23,8 @@ TradenairaBlogo::Application.routes.draw do
   get '/tags', to: 'home#search_tags'
   get '/search_posts/:query', to: 'home#search_by_query'
   get '/search_by_id/:post_id', to: 'home#search_by_id'
+  post '/update_sidebar', to: 'home#update_sidebar'
+  get '/blog/admin/links', to: 'blogo/admin/posts#sidebar_links'
 
 
 

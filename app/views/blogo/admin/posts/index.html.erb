@@ -1,3 +1,10 @@
+<h3>Show Sidebar?</h3>
+<% if Blogo::User.first.sidebar_enable? %>
+  <input type="checkbox" name="show_sidebar" id="update_sidebar" checked="" />
+<% else %>
+  <input type="checkbox" name="show_sidebar" id="update_sidebar" />
+<% end %>
+<label for="update_sidebar"></label>
 <h1 class="admin-header"><%= t('blogo.admin.posts') %></h1>
 
 <table class="pure-table pure-table-striped">
@@ -34,15 +41,87 @@
     <% end %>
   </tbody>
 </table>
-<h3>Show Sidebar?</h3>
-<input type="checkbox" name="show_sidebar" id="update_sidebar" />
 
 <script type="text/javascript">
   $('#update_sidebar').on('change', function() {
     if($(this).is(":checked")) {
-      console.log('checked');
+      $.ajax({
+        url: "/update_sidebar",
+        type: "post",
+        dataType: "json",
+        data: { sidebar: true },
+        success: function(resp){
+          if(resp.success) {
+            alert('sidebar enabled');
+          } else {
+            alert('failed');
+          }
+        },
+        error: function(){
+          alert('error occurred');
+        }
+      });
     } else {
-      console.log('not checked');
+      $.ajax({
+        url: "/update_sidebar",
+        type: "post",
+        dataType: "json",
+        data: { sidebar: false },
+        success: function(resp){
+          if(resp.success) {
+            alert('sidebar disabled');
+          } else {
+            alert('failed');
+          }
+        },
+        error: function(){
+          alert('error occurred');
+        }
+      });
     }
   })
 </script>
+<style type="text/css">
+#update_sidebar {
+  display: none;
+}
+#update_sidebar + label {
+  width: 60px;
+  overflow: hidden;
+  border-radius: 100px;
+  height: 30px;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+#update_sidebar + label::before {
+  content: '';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #d10c42;
+  transition: background-color .3s ease-in-out;
+}
+#update_sidebar + label::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  transition: transform .3s ease-in-out;
+}
+#update_sidebar:checked + label::before {
+  background-color: #0192d3;
+}
+#update_sidebar:checked + label::after {
+  transform: translateX(calc(100% + 4px)) translateY(-50%);
+}
+</style>

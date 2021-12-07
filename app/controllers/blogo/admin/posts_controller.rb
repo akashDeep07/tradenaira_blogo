@@ -70,6 +70,10 @@ module Blogo::Admin
       render 'blogo/posts/show', layout: 'blogo/blog'
     end
 
+    def sidebar_links
+      @sidebar_links = SidebarLink.all
+    end
+
 
     private
 
