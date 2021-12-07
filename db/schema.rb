@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211203120510) do
+ActiveRecord::Schema.define(version: 20211207123327) do
 
   create_table "blogo_posts", force: true do |t|
     t.integer  "user_id",                          null: false
@@ -52,13 +52,22 @@ ActiveRecord::Schema.define(version: 20211203120510) do
   add_index "blogo_tags", ["name"], name: "index_blogo_tags_on_name", unique: true, using: :btree
 
   create_table "blogo_users", force: true do |t|
-    t.string   "name",            null: false
-    t.string   "email",           null: false
-    t.string   "password_digest", null: false
+    t.string   "name",                            null: false
+    t.string   "email",                           null: false
+    t.string   "password_digest",                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "sidebar_enable",  default: false
   end
 
   add_index "blogo_users", ["email"], name: "index_blogo_users_on_email", unique: true, using: :btree
+
+  create_table "sidebar_links", force: true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.boolean  "is_active",  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
