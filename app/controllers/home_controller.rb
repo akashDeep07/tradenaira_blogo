@@ -1,11 +1,25 @@
 class HomeController < ApplicationController
 
 	def index
-		@posts = Blogo::Post.published.where(:is_custom => false).sort.reverse
+		# @posts = Blogo::Post.published.where(:is_custom => false).sort.reverse[0..15]
 		@latest_posts = Blogo::Post.published.where(:is_custom => false).sort.reverse.first(3)
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
 		@meta_description = "The best place to find the current naira exchange rate today. Get live updates on the black market and learn how you can get the exchange rate in Nigeria today"
 		@meta_title = "Naira Exchange Rate Today | Trade Naira"
+
+		@posts = Blogo::Post.published.where(is_custom: false).page(1).per(16)
+
+	end
+
+	def load_more_post
+		if params[:page].present?
+			@posts = Blogo::Post.published.where(is_custom: false).page(params[:page]).per(16)
+			if @posts.present?
+				render json: { success: true, data: @posts }, status: 200
+			else
+				render json: { success: false }, status: 200
+			end
+		end
 	end
 
 	def show
@@ -64,5 +78,16 @@ class HomeController < ApplicationController
 			end
 		end
 	end
+
+	# def load_more_post
+	# 	if params[:after].present?
+	# 		@posts = Blogo::Post.published.where(:is_custom => false).sort.reverse[(params[:after].to_i)..(params[:after].to_i+15)]
+	# 		if @posts.present?
+	# 			render json: { success: true, : @posts }, status: 200
+	# 		else
+	# 			render json: { success: false }, status: 200
+	# 		end
+	# 	end
+	# end
 
 end

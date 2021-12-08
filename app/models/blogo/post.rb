@@ -1,4 +1,7 @@
 class Blogo::Post < ActiveRecord::Base
+
+  default_scope { order(id: :desc) }
+
   belongs_to :user
 
   has_many :taggings
@@ -10,7 +13,7 @@ class Blogo::Post < ActiveRecord::Base
 
   scope :published, -> { where(published: true).where("published_at <= ?", Time.zone.now) }
 
-  default_scope { order('published_at DESC') }
+  # default_scope { order('published_at DESC') }
 
   # before_save :set_meta_description, :set_meta_image
   before_save :set_meta_image

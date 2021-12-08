@@ -23,7 +23,7 @@
 </div>
 <div class="container-fluid pt-5 pb-5">
 	<div class="container all-blogs">
-		<div class="row">
+		<div class="row append_posts">
 			<% @posts.each do |post| %>
 				<div class="col-3 blog-card">
 					<div class="col">
@@ -49,6 +49,11 @@
 				</div>
 			<% end %>
 		</div>
+		<div class="text-center post-loader mt-5 mb-5 hide">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
 	</div>
 </div>
 <div class="quick-view-popup">
@@ -58,23 +63,25 @@
 	</div>
 </div>
 <script type="text/javascript">
-	$('.quick-view').on('click', function() {
-		var post_id = $(this).data('id');
-		var post_html = '';
-		$.ajax({
-			url: "/search_by_id/"+post_id,
-			type: "get",
-			success: function(resp){
-				if (resp.success) {
-					if (resp.data.content) {
-						$('.quick-view-popup').fadeIn('slow');
-						$('.quick-view-content').html(`<h4>${resp.data.title}</h4>${resp.data.content}`);
+	$(document).on('ready', function() {
+		$(document).on('click', '.quick-view', function() {
+			var post_id = $(this).data('id');
+			var post_html = '';
+			$.ajax({
+				url: "/search_by_id/"+post_id,
+				type: "get",
+				success: function(resp){
+					if (resp.success) {
+						if (resp.data.content) {
+							$('.quick-view-popup').fadeIn('slow');
+							$('.quick-view-content').html(`<h4>${resp.data.title}</h4>${resp.data.content}`);
+						}
 					}
+				},
+				dataType: "json",
+				error: function(){
 				}
-			},
-			dataType: "json",
-			error: function(){
-			}
+			});
 		});
 	});
 	$('.close-quick-view').on('click', function() {
@@ -145,5 +152,57 @@
 			}, 1000);
 			$('.info[data-id="1"]').click();
 		});
+	});
+	$(window).scroll(function() {
+		var top_of_element = $(".all-blogs").offset().top;
+		var bottom_of_element = $(".all-blogs").offset().top + $(".all-blogs").outerHeight();
+		var bottom_of_screen = $(window).scrollTop() + $(window).innerHeight();
+		var top_of_screen = $(window).scrollTop();
+		if (typeof all_posts === 'undefined') {
+			all_posts = false;
+		}
+		if (all_posts == false) {
+			if ((bottom_of_screen > bottom_of_element + 200)){
+				if (typeof last_id === 'undefined') {
+					last_id = 2
+				}
+				$('.post-loader').removeClass('hide');
+				$.ajax({
+					url: "/load_more_post/?page="+last_id,
+					type: "get",
+					success: function(resp){
+						if(resp.success) {
+							var posts = '';
+							$.each(resp.data, function(index, value) {
+								posts += `<div class="col-3 blog-card">
+												<div class="col">
+													<div class="image">
+														<a href="/blogs/${value.permalink}"><img src="${value.meta_image}"></a>
+														<time>${value.published_at}</time>
+													</div>
+													<div class="content">
+														<h4><a href="/blogs/${value.permalink}">${value.title}</a></h4>
+														<p>${value.raw_content.substring(0,60)}...</p>
+														<span class="quick-view" data-id="${value.id}">Quick View <i class="fa fa-eye"></i></span>
+													</div>
+												</div>
+											</div>`;
+							});
+							$('.append_posts').append(posts);
+							last_id = last_id + 1;
+							$('.post-loader').addClass('hide');
+						} else {
+							all_posts = true;
+							$('.post-loader').addClass('hide');
+						}
+					},
+					error: function(){
+						$('.post-loader').addClass('hide');
+					}
+				});
+			} else {
+				$('.post-loader').addClass('hide');
+			}
+		}
 	});
 </script>

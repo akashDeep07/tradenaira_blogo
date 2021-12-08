@@ -25,6 +25,9 @@ TradenairaBlogo::Application.routes.draw do
   get '/search_by_id/:post_id', to: 'home#search_by_id'
   post '/update_sidebar', to: 'home#update_sidebar'
   get '/blog/admin/links', to: 'blogo/admin/posts#sidebar_links'
+  get '/blog/admin/links/new', to: 'blogo/admin/posts#create_new_link'
+  post '/blog/admin/links/new', to: 'blogo/admin/posts#create_new_link'
+  get '/load_more_post', to: 'home#load_more_post'
 
 
 

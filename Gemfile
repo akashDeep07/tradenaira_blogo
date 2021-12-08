@@ -63,3 +63,4 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'blogo', '~> 0.1.4'
+gem 'kaminari', '~> 0.16.3'

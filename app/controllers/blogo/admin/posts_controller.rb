@@ -74,6 +74,10 @@ module Blogo::Admin
       @sidebar_links = SidebarLink.all
     end
 
+    def create_new_link
+      @sidebar_links = SidebarLink.all
+    end
+
 
     private
 

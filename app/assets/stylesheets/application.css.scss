@@ -38,9 +38,10 @@ footer {
             margin: 0;
             list-style-type: none;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             li {
-                margin: 0 15px;
+                margin: 5px 15px;
                 a {
                     text-decoration: none;
                     i {
@@ -435,7 +436,38 @@ footer {
         }
     }
 }
+@keyframes post-load {
+    0% {
+        transform: scale(1.0);
+    }
+    50% {
+        transform: scale(0.7);
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}
 .all-blogs {
+    .post-loader {
+        display: flex;
+        justify-content: center;
+        &.hide {
+            display: none;
+        }
+        span {
+            width: 15px;
+            height: 15px;
+            background-color: $blue-color;
+            margin: 0 5px;
+            animation: post-load 1s ease infinite;
+            &:nth-child(2) {
+                animation-delay: .3s;
+            }
+            &:nth-child(3) {
+                animation-delay: .6s;
+            }
+        }
+    }
     .blog-card {
         margin: 10px 0;
         .col {
@@ -576,10 +608,46 @@ span.marker {
         margin: 0 10px 10px 0;
     }
 }
+@media only screen and (max-width: 1199px) {
+    .all-blogs .blog-card {
+        width: 33%;
+    }
+    .banner .info .text h1 {
+        font-size: 20px;
+    }
+}
+@media only screen and (max-width: 991px) {
+    .all-blogs .blog-card {
+        width: 50%;
+    }
+}
 @media only screen and (max-width: 767px) {
     .blogo-show {
         .meta-image {
             width: 100%;
         }
+    }
+    .banner .info .text {
+        h1 {
+            font-size: 16px;
+        }
+        p {
+            font-size: 14px;
+        }
+    }
+    .banner .grid {
+        display: flex;
+        flex-direction: column;
+        .col {
+            width: 100%;
+        }
+    }
+    .banner .info:not(.active) {
+        display: none;
+    }
+}
+@media only screen and (max-width: 575px) {
+    .all-blogs .blog-card {
+        width: 100%;
     }
 }
