@@ -6,6 +6,7 @@
 			<th>Link Title</th>
 			<th>Link URL</th>
 			<th>Status</th>
+			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -14,6 +15,11 @@
 				<td><%= link.title %></td>
 				<td><a href="<%= link.url %>"><%= link.url %></a></td>
 				<td><%= link.is_active %></td>
+				<td>
+					<%= link_to "Edit", "edit/#{link.id}", method: :get  %>
+
+					<%= link_to "Destroy", "delete/#{link.id}", method: :delete  %>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>

@@ -24,16 +24,15 @@ TradenairaBlogo::Application.routes.draw do
   get '/search_posts/:query', to: 'home#search_by_query'
   get '/search_by_id/:post_id', to: 'home#search_by_id'
   post '/update_sidebar', to: 'home#update_sidebar'
-  get '/blog/admin/links', to: 'blogo/admin/posts#sidebar_links'
-  get '/blog/admin/links/new', to: 'blogo/admin/posts#create_new_link'
-  post '/blog/admin/links/new', to: 'blogo/admin/posts#create_new_link'
+
   get '/load_more_post', to: 'home#load_more_post'
 
-
-
-
-
-
+  get '/blog/admin/links', to: 'blogo/admin/posts#sidebar_links'#, as: :all_sidebar_links
+  get '/blog/admin/links/new', to: 'blogo/admin/posts#new_sidebar_link'
+  post '/blog/admin/links', to: 'blogo/admin/posts#create_new_link_record'#, as: :create_sidebar_link
+  delete '/blog/admin/delete/:id', to: 'blogo/admin/posts#delete_sidebar_link'
+  get '/blog/admin/edit/:id', to: 'blogo/admin/posts#edit_sidebar_link'
+  post '/blog/admin/update/:id', to: 'blogo/admin/posts#update_sidebar_link'
 
 
 

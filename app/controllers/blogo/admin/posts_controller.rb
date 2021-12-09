@@ -1,6 +1,10 @@
 module Blogo::Admin
   # Responsible for posts management: creation, editing, deletion, preview.
   class PostsController < BaseController
+    skip_before_action :verify_authenticity_token, only: [:create_new_link_record, :update_sidebar_link]
+
+    before_action :check_sidebar_link, only: [:delete_sidebar_link, :edit_sidebar_link, :update_sidebar_link]
+
     # GET /admin/posts
     #
     def index
@@ -74,8 +78,47 @@ module Blogo::Admin
       @sidebar_links = SidebarLink.all
     end
 
-    def create_new_link
-      @sidebar_links = SidebarLink.all
+    def new_sidebar_link
+      @sidebar_links = SidebarLink.new
+    end
+
+    def create_new_link_record
+      link = SidebarLink.new sidebar_link_params
+      link.is_active = params[:active].present? ? true : false
+      if link.save
+        render_sidebar "Link has been created successfully."
+      else
+        flash[:alert] = link.errors.full_messages
+        @sidebar_links = SidebarLink.new
+        redirect_to request.referer
+      end
+    end
+
+    def delete_sidebar_link
+      if @link.present?
+        if @link.destroy
+          render_sidebar "link has been deleted."
+        end
+      else
+        render_sidebar "Some issue occured."
+      end
+    end
+
+    def edit_sidebar_link
+
+    end
+
+    def update_sidebar_link
+      if @link.present?
+        @link.is_active = params[:is_active].present? ? true : false
+        if @link.update sidebar_link_params
+          render_sidebar "Link has been updated."
+        else
+          render_sidebar @link.errors.full_messages
+        end
+      else
+        render_sidebar "Some issue occured."
+      end 
     end
 
 
@@ -94,6 +137,20 @@ module Blogo::Admin
         :meta_title,
         :meta_description
        	)
+    end
+
+    def sidebar_link_params
+      params.permit(:title, :url, :is_active)
+    end
+
+    def check_sidebar_link
+      @link = SidebarLink.find(params[:id]) rescue ""
+    end
+
+    def render_sidebar msg
+      flash[:alert] = msg
+      @sidebar_links = SidebarLink.all
+      redirect_to "/blog/admin/links"
     end
 
   end
