@@ -1,34 +1,70 @@
 <div class="container-fluid pt-5 pb-5 blogo-show">
-    <div class="container overflow-auto">
-        <h1><%= @post.title %></h1>
-        <time class="d-block text-end mb-3"><%= I18n.localize(@post.published_at.to_date, format: :long) %></time>
-        <img class="meta-image" src="<%= @post.meta_image %>">
-        <% re = /<img("[^"]*"|'[^']*'|[^'">])*>/ %>
-        <div id="raw_content">
-            <%= raw @post.raw_content.gsub!(re, '').gsub('&nbsp;','') %>
-        </div>
-    </div>
     <div class="container">
-        <% if Blogo.config.disqus_shortname %>
-            <section id='disqus-comments'>
-                <h1><%= t('blogo.user.comments') %></h1>
-                <div id="disqus_thread" aria-live="polite"></div>
-                <noscript><%= t('blogo.user.please_enable_javascript') %></noscript>
-            </section>
-            <script type="text/javascript">
-                var disqus_shortname  = '<%= Blogo.config.disqus_shortname %>';
-                var disqus_identifier = 'blog-post-<%= @post.id %>';
-                var disqus_url        = '<%= blogo_post_url(@post) %>';
-                var disqus_title      = '<%= @post.title %>';
-                var disqus_script     = 'embed.js';
+        <div class="row">
+            <div class="col-8 overflow-auto">
+                <img class="meta-image" src="<%= @post.meta_image %>">
+                <h1><%= @post.title %></h1>
+                <time class="d-block text-end mb-3"><%= I18n.localize(@post.published_at.to_date, format: :long) %></time>
+                <% re = /<img("[^"]*"|'[^']*'|[^'">])*>/ %>
+                <div id="raw_content">
+                    <%= raw @post.raw_content.gsub!(re, '').gsub('&nbsp;','') %>
+                </div>
+                <% if Blogo.config.disqus_shortname %>
+                    <section id='disqus-comments'>
+                        <h1><%= t('blogo.user.comments') %></h1>
+                        <div id="disqus_thread" aria-live="polite"></div>
+                        <noscript><%= t('blogo.user.please_enable_javascript') %></noscript>
+                    </section>
+                    <script type="text/javascript">
+                        var disqus_shortname  = '<%= Blogo.config.disqus_shortname %>';
+                        var disqus_identifier = 'blog-post-<%= @post.id %>';
+                        var disqus_url        = '<%= blogo_post_url(@post) %>';
+                        var disqus_title      = '<%= @post.title %>';
+                        var disqus_script     = 'embed.js';
 
-                (function () {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = document.location.protocol + '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                }());
-            </script>
-        <% end %>
+                        (function () {
+                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                        dsq.src = document.location.protocol + '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        }());
+                    </script>
+                <% end %>
+            </div>
+            <div class="col-4 posts-sidebar">
+                <form class="search-form">
+                    <div class="search-container">
+                        <input type="text" name="search" placeholder="Search Posts" />
+                        <input type="submit" name="search_posts" value="Search" />
+                    </div>
+                </form>
+                <h5>New Posts</h5>
+                <ul>
+                    <% @latest_posts.each do |post| %>
+                        <li>
+                            <a href="/blogs/<%= post.permalink %>"><img src="<%= post.meta_image %>"></a>
+                            <div class="new-post-content">
+                                <h6><%= link_to post.title, '/blogs/'+post.permalink %></h6>
+                                <time><%= I18n.localize(post.published_at.to_date, format: :long) %></time>
+                            </div>
+                        </li>
+                    <% end %>
+                </ul>
+                <h5>Tags</h5>
+                <div class="tags">
+                    <% @tags.each do |tag| %>
+                        <% post_count = 0 %>
+                        <% tag.posts.each do |post| %>
+                            <% if post.is_custom? %>
+                                <% post_count += 1 %>
+                            <% end %>
+                        <% end %>
+                        <% if tag.posts.count > post_count %>
+                            <a href="/tags/<%= tag.name %>">#<%= tag.name %></a>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script type="text/javascript">
