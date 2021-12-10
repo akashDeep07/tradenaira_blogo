@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211207123327) do
+ActiveRecord::Schema.define(version: 20211210100858) do
+
+  create_table "blogo_banners", force: true do |t|
+    t.string   "title"
+    t.string   "image"
+    t.integer  "category"
+    t.string   "target_link"
+    t.string   "settings"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "blogo_posts", force: true do |t|
     t.integer  "user_id",                          null: false

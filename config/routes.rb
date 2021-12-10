@@ -34,6 +34,18 @@ TradenairaBlogo::Application.routes.draw do
   get '/blog/admin/edit/:id', to: 'blogo/admin/posts#edit_sidebar_link'
   post '/blog/admin/update/:id', to: 'blogo/admin/posts#update_sidebar_link'
 
+  # get '/blog/admin/banners', to: 'blogo/admin/banners#index'
+
+  namespace :blogo do
+    namespace :admin do
+      resources :banners, except: %w(show) #do
+        # collection do
+        #   get 'list/:category', to: "banners#index", as: 'list'
+        # end
+      # end
+    end
+  end
+
 
 
 

@@ -1,0 +1,54 @@
+<div class="banner_edit_form">
+<div class="row">
+  <div class="col-md-22">
+<div class="form_css">
+<%= form_for [:blogo, :admin, @blogo_banner], 
+html: {id: 'post-form', class: 'pure-form pure-form-stacked', multipart: true } do |f| %>
+  <%= f.hidden_field :category %>
+  <% if @blogo_banner.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@blogo_banner.errors.count, "error") %> prohibited this blogo_banner from being saved:</h2>
+
+      <ul>
+      <% @blogo_banner.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :image %>
+    <%= f.file_field :image %>
+  </div>
+
+  <div class="field">
+    <%= f.label :image_link %>
+    <%= f.text_field :target_link %>
+  </div>
+
+  <div class="field">
+    <%= f.label :category %>
+    <select name="category">
+      <option value="news_home_top">Top Banner</option>
+      <option value="news_home_side">Side Banner</option>
+    </select>
+  </div>
+
+    <div class="field">
+    <%= f.label :content %>
+    <%= f.text_field :settings %>
+  </div>
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+</div>
+</div>
+</div></div>

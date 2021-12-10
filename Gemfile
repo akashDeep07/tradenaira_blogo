@@ -35,6 +35,8 @@ end
 
 group :development do 
   gem 'pry-rails', '~> 0.3.9'
+  gem 'rubocop-rails', '~> 2.4'
+
 
   gem 'capistrano',         require: false
   gem 'capistrano-rvm',     require: false
@@ -64,3 +66,6 @@ end
 
 gem 'blogo', '~> 0.1.4'
 gem 'kaminari', '~> 0.16.3'
+gem 'carrierwave', '~> 0.10.0'
+gem 'enumerize'
+gem 'simple_enum', '~> 2.3.0' , require: 'simple_enum/mongoid'
