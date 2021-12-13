@@ -1,32 +1,63 @@
+<h1>Advertisement Banners</h1>
 <div class="spce_top">
 <div class="row banner_row">
   <div class="col-sm-18 inner_left_table_box">
     
 
-    <%= link_to "New Banner", new_blogo_admin_banner_path %>
+    <%= link_to "New Banner", new_blogo_admin_banner_path, class: "link-btn btn-edit add-new-btn" %>
 
-    <% if @blogo_banners.present? %>
-    <table>
+    <% if @blogo_banners_top.present? %>
+    <table class="pure-table pure-table-striped">
       <thead>
+        <tr>
+          <th colspan="4" class="table-heading">Top Banners</th>
+        </tr>
         <tr>
           <th>Title</th>
           <th>Image</th>
-           
-          <th></th>
-          <th></th>
-          <th></th>
+          <th>Category</th>
+          <th>Actions</th>
         </tr>
       </thead>
 
       <tbody>
-        <% @blogo_banners.each do |banner| %>
+        <% @blogo_banners_top.each do |banner| %>
           <tr>
             <td><%= banner.title %></td>
             <td><%= image_tag banner.image.url, style: " max-height: 50px;" %></td>
-           
-            <td><%#= link_to 'Show', blogo_banner %></td>
-            <td><%= link_to 'Edit', edit_blogo_admin_banner_path(banner), class: "pure-button  button-secondary" %></td>
-            <td><%= link_to 'Destroy', blogo_admin_banner_path(banner), class: 'pure-button  button-warning',method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= banner.category? == 0 ? "top" : "side" %></td>
+            <td>
+              <%= link_to 'Edit', edit_blogo_admin_banner_path(banner), class: "btn-edit pure-button  button-secondary" %>
+              <%= link_to 'Destroy', blogo_admin_banner_path(banner), class: 'btn-delete pure-button  button-warning',method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% end %>
+
+    <% if @blogo_banners_side.present? %>
+      <thead>
+        <tr>
+          <th colspan="4" class="table-heading">Side Banners</th>
+        </tr>
+        <tr>
+          <th>Title</th>
+          <th>Image</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @blogo_banners_side.each do |banner| %>
+          <tr>
+            <td><%= banner.title %></td>
+            <td><%= image_tag banner.image.url, style: " max-height: 50px;" %></td>
+            <td><%= banner.category? == 0 ? "top" : "side" %></td>
+            <td>
+              <%= link_to 'Edit', edit_blogo_admin_banner_path(banner), class: "btn-edit pure-button  button-secondary" %>
+              <%= link_to 'Destroy', blogo_admin_banner_path(banner), class: 'btn-delete pure-button  button-warning',method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
           </tr>
         <% end %>
       </tbody>
@@ -38,6 +69,33 @@
 
 </div>
 
- 
-
-<%#= link_to 'New Banner', new_blogo_banner_path %>
+<style type="text/css">
+  .link-btn {
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    margin: 0 5px;
+    display: inline-block;
+    color: #ffffff;
+  }
+  .btn-edit {
+    background-color: #0192da;
+  }
+  .btn-delete {
+    background-color: #a30404;
+  }
+  .add-new-btn {
+    margin: 0;
+    margin-bottom: 25px;
+  }
+  .table-heading {
+    text-align: center;
+    border-bottom: 1px solid #9d9d9d !important;
+  }
+  .mt-50 {
+    margin-top: 50px;
+  }
+  table {
+    width: 100%;
+  }
+</style>

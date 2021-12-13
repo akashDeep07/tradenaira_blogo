@@ -12,7 +12,8 @@ module Blogo::Admin
 	  respond_to :html
 
 	  def index
-	    @blogo_banners = Blogo::Banner.all
+	    @blogo_banners_top = Blogo::Banner.where category: 0
+	    @blogo_banners_side = Blogo::Banner.where category: 1
 	    respond_with(@blogo_banners)
 	  end
 

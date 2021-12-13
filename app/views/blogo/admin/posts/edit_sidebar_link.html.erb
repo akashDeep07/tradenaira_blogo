@@ -1,12 +1,15 @@
 <h1>Create New Link</h1>
-<form action="/blog/admin/update/<%= @link.id %>" method="post">
-	<input type="text" name="url" placeholder="url" value="<%= @link.url %>" />
-	<input type="text" name="title" placeholder="title" value="<%= @link.title %>" />
-	Active?
+<form action="/blog/admin/update/<%= @link.id %>" method="post" class="pure-form pure-form-stacked">
+	<label>URL</label>
+	<input type="text" name="url" placeholder="url" value="<%= @link.url %>" /><br />
+	<label>Title</label>
+	<input type="text" name="title" placeholder="title" value="<%= @link.title %>" /><br />
+	<label for="active_url" style="display: inline-block;">Active?</label>
 	<% if @link.is_active %>
-		<input type="checkbox" name="active" checked="" />
+		<input type="checkbox" name="active" checked="" id="active_url" />
 	<%else%>
-		<input type="checkbox" name="is_active" />
+		<input type="checkbox" name="is_active" id="active_url" />
 	<%end%>
+	<br /><br />
 	<input type="submit" name="add_link" />
 </form>

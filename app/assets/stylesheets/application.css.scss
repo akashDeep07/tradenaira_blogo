@@ -600,6 +600,38 @@ span.marker {
     background-color: #ffff00;
 }
 .blogo-show {
+    .advert-banner {
+        width: 100%;
+        overflow: hidden;
+        margin-bottom: 20px;
+        position: relative;
+        border: 1px solid #d7d7d7;
+        &.top_banner {
+            height: 100px;
+        }
+        &.side_banner {
+            height: 650px;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+        .advert-banner-settings {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 5px 10px;
+            background-color: $blue-color;
+            color: #ffffff;
+            border-top-left-radius: 4px;
+            a {
+                color: #ffffff;
+                font-weight: bold;
+            }
+        }
+    }
     #raw_content {
         text-align: justify;
     }

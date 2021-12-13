@@ -33,9 +33,9 @@ html: {id: 'post-form', class: 'pure-form pure-form-stacked', multipart: true } 
 
   <div class="field">
     <%= f.label :category %>
-    <select name="category">
-      <option value="news_home_top">Top Banner</option>
-      <option value="news_home_side">Side Banner</option>
+    <select name="banner[category]">
+      <option value="0">Top Banner</option>
+      <option value="1" <%= @blogo_banner.category? == 1 ? "selected" : "" %>>Side Banner</option>
     </select>
   </div>
 

@@ -154,54 +154,65 @@
 		});
 	});
 	$(window).scroll(function() {
-		var top_of_element = $(".all-blogs").offset().top;
-		var bottom_of_element = $(".all-blogs").offset().top + $(".all-blogs").outerHeight();
-		var bottom_of_screen = $(window).scrollTop() + $(window).innerHeight();
-		var top_of_screen = $(window).scrollTop();
-		if (typeof all_posts === 'undefined') {
-			all_posts = false;
+		if (typeof content_loading === 'undefined') {
+			content_loading = false;
 		}
-		if (all_posts == false) {
-			if ((bottom_of_screen > bottom_of_element + 200)){
-				if (typeof last_id === 'undefined') {
-					last_id = 2
-				}
-				$('.post-loader').removeClass('hide');
-				$.ajax({
-					url: "/load_more_post/?page="+last_id,
-					type: "get",
-					success: function(resp){
-						if(resp.success) {
-							var posts = '';
-							$.each(resp.data, function(index, value) {
-								posts += `<div class="col-3 blog-card">
-												<div class="col">
-													<div class="image">
-														<a href="/blogs/${value.permalink}"><img src="${value.meta_image}"></a>
-														<time>${value.published_at}</time>
-													</div>
-													<div class="content">
-														<h4><a href="/blogs/${value.permalink}">${value.title}</a></h4>
-														<p>${$(value.raw_content).text().substring(0,60)}...</p>
-														<span class="quick-view" data-id="${value.id}">Quick View <i class="fa fa-eye"></i></span>
-													</div>
-												</div>
-											</div>`;
-							});
-							$('.append_posts').append(posts);
-							last_id = last_id + 1;
-							$('.post-loader').addClass('hide');
-						} else {
-							all_posts = true;
-							$('.post-loader').addClass('hide');
-						}
-					},
-					error: function(){
-						$('.post-loader').addClass('hide');
+		if (content_loading == false) {
+			var top_of_element = $(".all-blogs").offset().top;
+			var bottom_of_element = $(".all-blogs").offset().top + $(".all-blogs").outerHeight();
+			var bottom_of_screen = $(window).scrollTop() + $(window).innerHeight();
+			var top_of_screen = $(window).scrollTop();
+			if (typeof all_posts === 'undefined') {
+				all_posts = false;
+			}
+			if (all_posts == false) {
+				if ((bottom_of_screen > bottom_of_element + 200)){
+					content_loading = true;
+					if (typeof last_id === 'undefined') {
+						last_id = 2
 					}
-				});
-			} else {
-				$('.post-loader').addClass('hide');
+					$('.post-loader').removeClass('hide');
+					$.ajax({
+						url: "/load_more_post/?page="+last_id,
+						type: "get",
+						success: function(resp){
+							if(resp.success) {
+								var posts = '';
+								$.each(resp.data, function(index, value) {
+									var iso_date = value.published_at.split('T')[0].split('-');
+									month = new Date(iso_date[0], (iso_date[1]-1), iso_date[2]).toLocaleString('en-us', { month: 'long' });
+									posts += `<div class="col-3 blog-card">
+													<div class="col">
+														<div class="image">
+															<a href="/blogs/${value.permalink}"><img src="${value.meta_image}"></a>
+															<time>${month} ${iso_date[2]}, ${iso_date[0]}</time>
+														</div>
+														<div class="content">
+															<h4><a href="/blogs/${value.permalink}">${value.title}</a></h4>
+															<p>${$(value.raw_content).text().substring(0,60)}...</p>
+															<span class="quick-view" data-id="${value.id}">Quick View <i class="fa fa-eye"></i></span>
+														</div>
+													</div>
+												</div>`;
+								});
+								$('.append_posts').append(posts);
+								last_id = last_id + 1;
+								$('.post-loader').addClass('hide');
+								content_loading = false;
+							} else {
+								all_posts = true;
+								$('.post-loader').addClass('hide');
+								content_loading = false;
+							}
+						},
+						error: function(){
+							$('.post-loader').addClass('hide');
+							content_loading = false;
+						}
+					});
+				} else {
+					$('.post-loader').addClass('hide');
+				}
 			}
 		}
 	});
