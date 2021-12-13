@@ -1,5 +1,5 @@
 <h1>Links</h1>
-<a href="/blog/admin/links/new">Add New Link</a>
+<a class="link-btn btn-edit add-new-btn" href="/blog/admin/links/new">Add New Link</a>
 <table class="pure-table pure-table-striped">
 	<thead>
 		<tr>
@@ -14,13 +14,52 @@
 			<tr>
 				<td><%= link.title %></td>
 				<td><a href="<%= link.url %>"><%= link.url %></a></td>
-				<td><%= link.is_active %></td>
 				<td>
-					<%= link_to "Edit", "edit/#{link.id}", method: :get  %>
+					<% if link.is_active? %>
+						<span class="link-active">
+					<% else %>
+						<span class="link-inactive">
+					<% end %>
+				</td>
+				<td>
+					<%= link_to "Edit", "edit/#{link.id}", method: :get, class: "link-btn btn-edit"  %>
 
-					<%= link_to "Destroy", "delete/#{link.id}", method: :delete  %>
+					<%= link_to "Destroy", "delete/#{link.id}", method: :delete, class: "link-btn btn-delete"  %>
 				</td>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
+<style type="text/css">
+	span[class^="link-"] {
+		display: block;
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		margin: auto;
+	}
+	.link-active {
+		background-color: #00a300;
+	}
+	.link-inactive {
+		background-color: #a30404;
+	}
+	.link-btn {
+		padding: 5px 10px;
+		border-radius: 4px;
+		text-decoration: none;
+		margin: 0 5px;
+		display: inline-block;
+		color: #ffffff;
+	}
+	.btn-edit {
+		background-color: #0192da;
+	}
+	.btn-delete {
+		background-color: #a30404;
+	}
+	.add-new-btn {
+		margin: 0;
+		margin-bottom: 25px;
+	}
+</style>
