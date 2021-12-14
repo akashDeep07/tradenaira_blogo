@@ -1,6 +1,6 @@
 class Blogo::Banner < ActiveRecord::Base
 
-	mount_uploader :image, FileUploader
+	mount_uploader :image, ::FileUploader
 
 	validates :category, :image, presence: true
 
