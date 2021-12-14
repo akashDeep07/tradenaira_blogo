@@ -1,14 +1,14 @@
 <div class="container-fluid pt-5 pb-5 blogo-show">
     <div class="container">
-<!--         <div class="advert-banner top_banner">
-            <%# banner = rand_banner(:news_home_top) %>
-            <%# unless banner.nil? %>
-                <%#= link_to image_tag(banner.image.url, alt: banner.title, title: banner.title), banner.target_link, target: "_blank" %>
-                <%# unless banner.settings.nil? %>
-                    <div class="advert-banner-settings"><%#= raw banner.settings %></div>
-                <%# end %>
-            <%#  end %>
-        </div> -->
+        <div class="advert-banner top_banner">
+            <% banner = rand_banner(:news_home_top) %>
+            <% unless banner.nil? %>
+                <%= link_to image_tag(banner.image.url, alt: banner.title, title: banner.title), banner.target_link, target: "_blank" %>
+                <% unless banner.settings.nil? %>
+                    <div class="advert-banner-settings"><%= raw banner.settings %></div>
+                <% end %>
+            <%  end %>
+        </div>
         <div class="row">
             <div class="col-8 overflow-auto">
                 <img class="meta-image" src="<%= @post.meta_image %>">
@@ -58,15 +58,15 @@
                         </li>
                     <% end %>
                 </ul>
-<!--                 <div class="advert-banner side_banner">
-                    <%# banner = rand_banner(:news_home_side) %>
-                    <%# unless banner.nil? %>
-                        <%#= link_to image_tag(banner.image.url, alt: banner.title, title: banner.title), banner.target_link, target: "_blank" %>
-                        <%# unless banner.settings.nil? %>
-                            <div class="advert-banner-settings"><%#= raw banner.settings %></div>
-                        <%# end %>
-                    <%# end %>
-                </div> -->
+                <div class="advert-banner side_banner">
+                    <% banner = rand_banner(:news_home_side) %>
+                    <% unless banner.nil? %>
+                        <%= link_to image_tag(banner.image.url, alt: banner.title, title: banner.title), banner.target_link, target: "_blank" %>
+                        <% unless banner.settings.nil? %>
+                            <div class="advert-banner-settings"><%= raw banner.settings %></div>
+                        <% end %>
+                    <% end %>
+                </div>
                 <h5>Tags</h5>
                 <div class="tags">
                     <% @tags.each do |tag| %>
