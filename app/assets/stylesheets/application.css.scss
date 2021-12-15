@@ -661,21 +661,24 @@ span.marker {
 }
 .blogo-show {
     .advert-banner {
-        width: 100%;
+        width: 780px;
         overflow: hidden;
         margin-bottom: 20px;
         position: relative;
-        border: 1px solid #d7d7d7;
+        margin-left: auto;
+        margin-right: auto;
         &.top_banner {
-            height: 100px;
+            height: 90px;
         }
         &.side_banner {
-            height: 650px;
+            height: 600px;
+            width: 300px;
         }
         img {
+            border: 1px solid #d7d7d7;
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             object-position: center;
         }
         .advert-banner-settings {
