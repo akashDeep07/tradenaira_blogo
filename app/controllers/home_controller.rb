@@ -24,7 +24,7 @@ class HomeController < ApplicationController
 	def show
 		@post = Blogo::Post.published.where(:permalink => params[:permalink], :is_custom => false).first!
 		@meta_description = @post.meta_description if @post.meta_description.present?
-		@meta_title = @post.meta_title.present? ? @post.meta_title : @post.title
+		@meta_title = @post.meta_title.present? ? @post.meta_title[0..59] : @post.title[0..59]
 		@latest_posts = Blogo::Post.published.where(:is_custom => false).first(5)
 		@tags = Blogo::Tag.all
 	end

@@ -1,0 +1,112 @@
+$blue-color: #0192d3;
+$sky-color: #0abfe8;
+.blogo-show {
+    .advert-banner {
+        width: 780px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        &.top_banner {
+            height: 90px;
+        }
+        &.side_banner {
+            height: 600px;
+            width: 300px;
+        }
+        img {
+            border: 1px solid #d7d7d7;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        .advert-banner-settings {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 5px 10px;
+            background-color: $blue-color;
+            color: #ffffff;
+            border-top-left-radius: 4px;
+            a {
+                color: #ffffff;
+                font-weight: bold;
+            }
+        }
+    }
+    #raw_content {
+        text-align: justify;
+    }
+    .meta-image {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 25px;
+    }
+    .posts-sidebar {
+        .search-form {
+            margin-bottom: 25px;
+            .search-container {
+                position: relative;
+                display: flex;
+                input[type="text"] {
+                    border-radius: 4px;
+                    border: 1px solid #9d9d9d;
+                    outline: 0;
+                    padding: 10px 25px;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    margin-right: 10px;
+                }
+                input[type="submit"] {
+                    border-radius: 4px;
+                    background-color: $blue-color;
+                    color: #ffffff;
+                    border: 0;
+                    outline: 0;
+                }
+            }
+        }
+        h5 {
+            margin-bottom: 0;
+            padding: 10px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            li {
+                display: flex;
+                padding: 20px 0;
+                border-top: 1px solid #9d9d9d;
+                img {
+                    width: 100px;
+                    margin-right: 10px;
+                    height: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                }
+                h6 {
+                    a {
+                        color: #333333;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+        .tags {
+            display: flex;
+            flex-flow: row wrap;
+            padding: 10px 0;
+            a {
+                text-decoration: none;
+                margin: 2px;
+                background-color: $blue-color;
+                padding: 5px 10px;
+                border-radius: 4px;
+                color: #ffffff;
+            }
+        }
+    }
+}
