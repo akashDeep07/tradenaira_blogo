@@ -1,4 +1,7 @@
 TradenairaBlogo::Application.routes.draw do
+
+  match '*path' => 'application#render_404', via: :all
+
   
   Blogo::Routes.mount_to(self, at: '/blog')
 
