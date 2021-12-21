@@ -1,9 +1,9 @@
 <div class="container-fluid pt-5 pb-5 blogo-show">
     <div class="container">
-         <div class="advert-banner top_banner">
+        <div class="advert-banner top_banner">
             <% banner = rand_banner(:news_home_top) %>
             <% unless banner.nil? %>
-                <%= link_to image_tag(banner.image.url, alt: banner.title, title: banner.title), banner.target_link, target: "_blank" %>
+                <%= link_to image_tag(banner.image.url, alt: banner.title, title: banner.title), "//#{banner.target_link.gsub("https://", "").gsub("http://", "")}", target: "_blank" %>
                 <% unless banner.settings.nil? %>
                     <div class="advert-banner-settings"><%= raw banner.settings %></div>
                 <% end %>
@@ -11,7 +11,7 @@
         </div>
         <div class="row">
             <div class="col-8 overflow-auto">
-                <img class="meta-image" src="<%= @post.meta_image %>">
+                <img class="meta-image" src="<%= @post.meta_image %>" alt="<%= @post.title %>">
                 <h1><%= @post.title %></h1>
                 <time class="d-block text-end mb-3"><%= I18n.localize(@post.published_at.to_date, format: :long) %></time>
                 <% re = /<img("[^"]*"|'[^']*'|[^'">])*>/ %>
@@ -50,7 +50,7 @@
                 <ul>
                     <% @latest_posts.each do |post| %>
                         <li>
-                            <a href="/blogs/<%= post.permalink %>"><img src="<%= post.meta_image %>"></a>
+                            <a href="/blogs/<%= post.permalink %>"><img src="<%= post.meta_image %>" alt="<%= post.title %>"></a>
                             <div class="new-post-content">
                                 <h6><%= link_to post.title, '/blogs/'+post.permalink %></h6>
                                 <time><%= I18n.localize(post.published_at.to_date, format: :long) %></time>
@@ -61,7 +61,7 @@
                 <div class="advert-banner side_banner">
                     <% banner = rand_banner(:news_home_side) %>
                     <% unless banner.nil? %>
-                        <%= link_to image_tag(banner.image.url, alt: banner.title, title: banner.title), banner.target_link, target: "_blank" %>
+                        <%= link_to image_tag(banner.image.url, alt: banner.title, title: banner.title), "//#{banner.target_link.gsub("https://", "").gsub("http://", "")}", target: "_blank" %>
                         <% unless banner.settings.nil? %>
                             <div class="advert-banner-settings"><%= raw banner.settings %></div>
                         <% end %>
@@ -92,6 +92,6 @@
                 $(this).attr('target', '_blank');
             });
         };
-        window.setInterval( change_links, 1000 ); // 5 seconds
+        window.setInterval( change_links, 1000 ); // 1 seconds
     });
 </script>

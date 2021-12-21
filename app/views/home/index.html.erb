@@ -12,7 +12,7 @@
 						<div class="bar"></div>
 					</div>
 					<div class="text">
-						<h1><%= latest_post.title %></h1>
+						<h2><%= latest_post.title %></h2>
 						<p><%= latest_post.raw_content.gsub(@re, '').gsub('&nbsp;','')[0,60] %>...</p>
 					</div>
 					<a href="/blogs/<%= latest_post.permalink %>" class="more">Read more</a>
@@ -23,12 +23,13 @@
 </div>
 <div class="container-fluid pt-5 pb-5">
 	<div class="container all-blogs">
+		<h1 class="blogo-heading">Blogs</h1>
 		<div class="row append_posts">
 			<% @posts.each do |post| %>
 				<div class="col-3 blog-card">
 					<div class="col">
 						<div class="image">
-							<a href="/blogs/<%= post.permalink %>"><img src="<%= post.meta_image %>"></a>
+							<a href="/blogs/<%= post.permalink %>"><img src="<%= post.meta_image %>" alt="<%= post.title %>"></a>
 							<time><%= I18n.localize(post.published_at.to_date, format: :long) %></time>
 						</div>
 						<div class="content">
@@ -60,6 +61,16 @@
 	<div class="quick-view-wrapper">
 		<i class="custom-close-btn close-quick-view"></i>
 		<div class="quick-view-content"></div>
+	</div>
+</div>
+<div class="popup-wrapper">
+	<div class="popup-inner">
+		<i class="fa fa-times close-popup"></i>
+		<div class="popup-content">
+			<h3>Important Notice!</h3>
+			<p>TradeNAIRA services and exchange rates have now moved to <a href="//jump.africa" target="_blank">www.jump.africa</a></p>
+			<p>Follow this link to register online today</p>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">
@@ -184,7 +195,7 @@
 									posts += `<div class="col-3 blog-card">
 													<div class="col">
 														<div class="image">
-															<a href="/blogs/${value.permalink}"><img src="${value.meta_image}"></a>
+															<a href="/blogs/${value.permalink}"><img src="${value.meta_image}" alt="${value.title}"></a>
 															<time>${month} ${iso_date[2]}, ${iso_date[0]}</time>
 														</div>
 														<div class="content">
@@ -215,5 +226,11 @@
 				}
 			}
 		}
+	});
+	$(window).on('load', function() {
+		$('.popup-wrapper').fadeIn('slow');
+	})
+	$('.close-popup').on('click', function() {
+		$('.popup-wrapper').fadeOut('slow');
 	});
 </script>
