@@ -62,7 +62,7 @@ html: {id: 'post-form', class: 'pure-form pure-form-stacked', multipart: true } 
   $('#banner_image').on('change', function() {
     let file = this.files[0];
     var banner_preview = '';
-    let validExtensions = ['image/jpeg', 'image/jpg', 'image/png', 'image/bmp'];
+    let validExtensions = ['image/jpeg', 'image/jpg', 'image/png', 'image/bmp', 'image/gif'];
     $('#upload_preview').html('');
     if (validExtensions.includes(file.type)) {
       let fileReader = new FileReader();
