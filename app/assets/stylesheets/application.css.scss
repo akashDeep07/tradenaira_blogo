@@ -23,6 +23,29 @@ $sky-color: #0abfe8;
 ::-webkit-scrollbar-thumb {
     background-color: #9d9d9d;
 }
+.jump-liveprices {
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    margin: 50px 0;
+    text-align: center;
+    li {
+        padding: 10px;
+        border-right: 1px solid $blue-color;
+        background-color: #f8f8f8;
+        .pair {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .last-price, .percent-change {
+            display: inline-block;
+            margin: 0 5px;
+        }
+        &:last-of-type {
+            border: 0;
+        }
+    }
+}
 .popup-wrapper {
     display: none;
     position: fixed;
