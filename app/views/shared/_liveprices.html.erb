@@ -1,0 +1,131 @@
+<ul class="jump-liveprices container">
+  <li class="col" data-pair="usdngn">
+    <span class="pair">
+      <span class="pair-name">USD|NGN</span>
+      <span class="last-price"></span>
+    </span>
+    <span class="percent-change">
+      <span class="psymbol">%</span>
+      <span class="change"></span>
+    </span>
+  </li>
+  <li class="col" data-pair="gbpngn">
+    <span class="pair">
+      <span class="pair-name">GBP|NGN</span>
+      <span class="last-price"></span>
+    </span>
+    <span class="percent-change">
+      <span class="psymbol">%</span>
+      <span class="change"></span>
+    </span>
+  </li>
+  <li class="col" data-pair="eurngn">
+    <span class="pair">
+      <span class="pair-name">EUR|NGN</span>
+      <span class="last-price"></span>
+    </span>
+    <span class="percent-change">
+      <span class="psymbol">%</span>
+      <span class="change"></span>
+    </span>
+  </li>
+  <li class="col" data-pair="ghsngn">
+    <span class="pair">
+      <span class="pair-name">GHS|NGN</span>
+      <span class="last-price"></span>
+    </span>
+    <span class="percent-change">
+      <span class="psymbol">%</span>
+      <span class="change"></span>
+    </span>
+  </li>
+  <li class="col" data-pair="zarngn">
+    <span class="pair">
+      <span class="pair-name">ZAR|NGN</span>
+      <span class="last-price"></span>
+    </span>
+    <span class="percent-change">
+      <span class="psymbol">%</span>
+      <span class="change"></span>
+    </span>
+  </li>
+  <li class="col" data-pair="kesngn">
+    <span class="pair">
+      <span class="pair-name">KES|NGN</span>
+      <span class="last-price"></span>
+    </span>
+    <span class="percent-change">
+      <span class="psymbol">%</span>
+      <span class="change"></span>
+    </span>
+  </li>
+  <li class="col" data-pair="usdghs">
+    <span class="pair">
+      <span class="pair-name">USD|GHS</span>
+      <span class="last-price"></span>
+    </span>
+    <span class="percent-change">
+      <span class="psymbol">%</span>
+      <span class="change"></span>
+    </span>
+  </li>
+  <li class="col" data-pair="gbpghs">
+    <span class="pair">
+      <span class="pair-name">GBP|GHS</span>
+      <span class="last-price"></span>
+    </span>
+    <span class="percent-change">
+      <span class="psymbol">%</span>
+      <span class="change"></span>
+    </span>
+  </li>
+  <li class="col" data-pair="usdkes">
+    <span class="pair">
+      <span class="pair-name">USD|KES</span>
+      <span class="last-price"></span>
+    </span>
+    <span class="percent-change">
+      <span class="psymbol">%</span>
+      <span class="change"></span>
+    </span>
+  </li>
+</ul>
+<script type="text/javascript">
+  var currency_obj = {
+    "usdngn": "₦",
+    "gbpngn": "₦",
+    "eurngn": "₦",
+    "ghsngn": "₦",
+    "zarngn": "₦",
+    "kesngn": "₦",
+    "usdghs": "¢",
+    "gbpghs": "¢",
+    "usdkes": "K"
+  }
+  $.each($('.jump-liveprices li'), function() {
+    var pair = $(this).data('pair')
+    $.ajax({
+      type: 'GET',
+      url: `//jump.africa/liveprice/${pair}`,
+      dataType: "json",
+      success:function(data){
+        if(data.data.trades[0])
+          price = data.data.trades[0]['price'];
+        percent_change = data.data.price_change;
+        console.log(`pair: ${pair}\nlast price: ${price}\nprice_change: ${percent_change}`);
+        $(`.jump-liveprices li[data-pair="${pair}"]`).find('.last-price').html(`${currency_obj[pair]}${price}`);
+        if(percent_change < 0) {
+          $(`.jump-liveprices li[data-pair="${pair}"]`).find('.percent-change').addClass('text-down');
+          percent_change_html = `<i class="fa fa-arrow-down"></i>${percent_change}`;
+        } else {
+          $(`.jump-liveprices li[data-pair="${pair}"]`).find('.percent-change').addClass('text-up');
+          percent_change_html = `<i class="fa fa-arrow-up"></i>${percent_change}`;
+        }
+        $(`.jump-liveprices li[data-pair="${pair}"]`).find('.percent-change').find('.change').html(percent_change_html);
+      },
+      error:function(data){
+      alert("Error");
+      }
+    });
+  });
+</script>

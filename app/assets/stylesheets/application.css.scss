@@ -26,25 +26,47 @@ $sky-color: #0abfe8;
 .jump-liveprices {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     list-style-type: none;
-    margin: 50px 0;
-    text-align: center;
+    margin: 20px auto;
+    font-size: 14px;
     li {
-        padding: 10px;
-        border-right: 1px solid $blue-color;
-        background-color: #f8f8f8;
+        cursor: pointer;
+        display: flex;
+        flex: 1;
+        flex-grow: 0;
+        flex-shrink: 1;
+        padding: 5px 15px;
+        border-left: 1px solid $blue-color;
+        margin: 10px 0;
+        &:hover {
+          background-color: #f2fcff;
+        }
         .pair {
             display: block;
-            margin-bottom: 10px;
+            margin-right: 10px;
         }
-        .last-price, .percent-change {
+        .last-price {
             display: inline-block;
-            margin: 0 5px;
+        }
+        .percent-change {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            .change {
+              display: flex;
+            }
         }
         &:last-of-type {
-            border: 0;
+            border-right: 1px solid $blue-color;
         }
     }
+}
+.text-up {
+    color: #4dd710;
+}
+.text-down {
+    color: #d00017;
 }
 .popup-wrapper {
     display: none;

@@ -46,6 +46,9 @@ $sky-color: #0abfe8;
     }
     .posts-sidebar {
         .search-form {
+            width: 300px;
+            margin-left: auto;
+            margin-right: auto;
             margin-bottom: 25px;
             .search-container {
                 position: relative;
@@ -72,10 +75,16 @@ $sky-color: #0abfe8;
         h5 {
             margin-bottom: 0;
             padding: 10px 0;
+            width: 300px;
+            margin-left: auto;
+            margin-right: auto;
         }
         ul {
             list-style-type: none;
             padding: 0;
+            width: 300px;
+            margin-left: auto;
+            margin-right: auto;
             li {
                 display: flex;
                 padding: 20px 0;
