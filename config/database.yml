@@ -4,7 +4,7 @@ development: &defaults
   database: tradenaira_blogo
   username: root
   password: root
-  pool: 5
+  pool: 40
   reconnect: true
   socket: '/tmp/mysql.sock'
   host: 127.0.0.1
