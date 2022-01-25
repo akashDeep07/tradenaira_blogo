@@ -8,6 +8,7 @@
       <span class="psymbol">%</span>
       <span class="change"></span>
     </span>
+    <div class="rate-popup">Naira to Dollar parallel rate today at <time class="user-time"></time></div>
   </li>
   <li class="col" data-pair="gbpngn">
     <span class="pair">
@@ -18,6 +19,7 @@
       <span class="psymbol">%</span>
       <span class="change"></span>
     </span>
+    <div class="rate-popup">Naira to Dollar parallel rate today at <time class="user-time"></time></div>
   </li>
   <li class="col" data-pair="eurngn">
     <span class="pair">
@@ -28,6 +30,7 @@
       <span class="psymbol">%</span>
       <span class="change"></span>
     </span>
+    <div class="rate-popup">Naira to Dollar parallel rate today at <time class="user-time"></time></div>
   </li>
   <li class="col" data-pair="ghsngn">
     <span class="pair">
@@ -38,6 +41,7 @@
       <span class="psymbol">%</span>
       <span class="change"></span>
     </span>
+    <div class="rate-popup">Naira to Dollar parallel rate today at <time class="user-time"></time></div>
   </li>
   <li class="col" data-pair="zarngn">
     <span class="pair">
@@ -48,6 +52,7 @@
       <span class="psymbol">%</span>
       <span class="change"></span>
     </span>
+    <div class="rate-popup">Naira to Dollar parallel rate today at <time class="user-time"></time></div>
   </li>
   <li class="col" data-pair="kesngn">
     <span class="pair">
@@ -58,6 +63,7 @@
       <span class="psymbol">%</span>
       <span class="change"></span>
     </span>
+    <div class="rate-popup">Naira to Dollar parallel rate today at <time class="user-time"></time></div>
   </li>
   <li class="col" data-pair="usdghs">
     <span class="pair">
@@ -68,6 +74,7 @@
       <span class="psymbol">%</span>
       <span class="change"></span>
     </span>
+    <div class="rate-popup">Naira to Dollar parallel rate today at <time class="user-time"></time></div>
   </li>
   <li class="col" data-pair="gbpghs">
     <span class="pair">
@@ -78,6 +85,7 @@
       <span class="psymbol">%</span>
       <span class="change"></span>
     </span>
+    <div class="rate-popup">Naira to Dollar parallel rate today at <time class="user-time"></time></div>
   </li>
   <li class="col" data-pair="usdkes">
     <span class="pair">
@@ -88,6 +96,7 @@
       <span class="psymbol">%</span>
       <span class="change"></span>
     </span>
+    <div class="rate-popup">Naira to Dollar parallel rate today at <time class="user-time"></time></div>
   </li>
 </ul>
 <script type="text/javascript">
@@ -128,4 +137,11 @@
       }
     });
   });
+</script>
+<script type="text/javascript">
+  setInterval(function() {
+    var d = new Date();
+    var n = d.toLocaleTimeString();
+    $('.user-time').html(n);
+  }, 1000);
 </script>
