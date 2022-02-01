@@ -8,11 +8,12 @@ class ApplicationController < ActionController::Base
 
   private
   def get_region
-      if Rails.env.production?
-        ip = request.remote_ip
-      else
-        ip = Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
-      end
+      # if Rails.env.production?
+      #   ip = request.remote_ip
+      # else
+        # ip = Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
+      # end
+      ip = Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
       p Geocoder.search(ip)
       region = Geocoder.search(ip).first.try(:region)
       return { ip: ip, region: region }
