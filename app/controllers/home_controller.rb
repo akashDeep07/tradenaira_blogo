@@ -6,8 +6,7 @@ class HomeController < ApplicationController
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
 		@meta_description = "The best place to find the current naira exchange rate today. Get live updates on the black market and learn how you can get the exchange rate in Nigeria today"
 		@meta_title = "Naira Exchange Rate Today | Trade Naira"
-
-
+		@user_region = get_region
 	end
 
 	def load_more_post
@@ -27,6 +26,7 @@ class HomeController < ApplicationController
 		@meta_title = @post.meta_title.present? ? @post.meta_title[0..59] : @post.title[0..59]
 		@latest_posts = Blogo::Post.published.where(:is_custom => false).first(5)
 		@tags = Blogo::Tag.all
+		@user_region = get_region
 	end
 
 	def search_tags

@@ -288,6 +288,7 @@ class CustomRoutesController < ApplicationController
 		@re = /<("[^"]*"|'[^']*'|[^'">])*>/
 		@latest_posts = Blogo::Post.published.where(:is_custom => false).first(5)
 		@tags = Blogo::Tag.all
+		@user_region = get_region
 	end
 
 end
