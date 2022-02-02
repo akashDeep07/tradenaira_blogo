@@ -23,6 +23,12 @@ $sky-color: #0abfe8;
 ::-webkit-scrollbar-thumb {
     background-color: #9d9d9d;
 }
+iframe#launcher, iframe#webWidget {
+    bottom: 50px !important;
+}
+iframe#webWidget {
+    max-height: calc(100vh - 50px) !important;
+}
 .jump-liveprices {
     display: flex;
     flex-wrap: wrap;
@@ -32,6 +38,7 @@ $sky-color: #0abfe8;
     font-size: 14px;
     li {
         display: flex;
+        flex-grow: 0;
         a {
             text-decoration: none;
             color: #000000;
@@ -77,8 +84,9 @@ $sky-color: #0abfe8;
             }
         }
         .pair {
-            display: block;
-            margin-right: 10px;
+            display: flex;
+            margin-right: 5px;
+            flex-direction: column;
         }
         .last-price {
             display: inline-block;
