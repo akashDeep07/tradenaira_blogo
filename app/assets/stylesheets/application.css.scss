@@ -29,12 +29,21 @@ iframe#launcher, iframe#webWidget {
 iframe#webWidget {
     max-height: calc(100vh - 50px) !important;
 }
+.liveprices-header {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 25px;
+    margin-bottom: 0;
+}
+.liveprices-content {
+    text-align: center;
+}
 .jump-liveprices {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     list-style-type: none;
-    margin: 20px auto;
+    margin: 5px auto;
     font-size: 14px;
     li {
         display: flex;
