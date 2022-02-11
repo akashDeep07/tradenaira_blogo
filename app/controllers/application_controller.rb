@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
       ip = Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
       p Geocoder.search(ip)
       region = Geocoder.search(ip).first.try(:region)
+      puts "region: #{region}, request_ip: #{request.ip}, ip: #{ip}"
       return { ip: ip, region: region }
   end
 
