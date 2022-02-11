@@ -9,17 +9,17 @@ class ApplicationController < ActionController::Base
   private
 
   def get_region
-      ip = Net::HTTP.get(URI.parse('http://checkip.amazonaws.com/')).squish
+    ip = request.ip
 
-      logger.info(Geocoder.search(ip))
+    logger.info(Geocoder.search(ip))
 
-      region = Geocoder.search(ip).first.try(:region)
+    region = Geocoder.search(ip).first.try(:region)
 
-      msg = "region: #{region}, request_ip: #{request.ip}, country: #{request.location.present? ? request.location.country : 'not present'}, city: #{request.location.present? ? request.location.city : 'not found' }, ip: #{ip}"
+    msg = "region: #{region}, request_ip: #{request.ip}, country: #{request.location.present? ? request.location.country : 'not present'}, city: #{request.location.present? ? request.location.city : 'not found' }, ip: #{ip}"
 
-      logger.info(msg)
-      
-      return { ip: ip, region: region }
+    logger.info(msg)
+    
+    return { ip: ip, region: region }
   end
 
   # def not_found
